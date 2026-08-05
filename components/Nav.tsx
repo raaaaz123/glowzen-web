@@ -5,6 +5,7 @@ const links = [
   { href: "/#how", label: "How it works" },
   { href: "/#tour", label: "Inside the app" },
   { href: "/#areas", label: "Areas" },
+  { href: "/guide", label: "Guide" },
   { href: "/#faq", label: "FAQ" },
 ];
 

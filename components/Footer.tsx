@@ -40,6 +40,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/guide" className="hover:text-rose-deep">
+                  Face yoga guide
+                </Link>
+              </li>
+              <li>
                 <Link href="/#faq" className="hover:text-rose-deep">
                   FAQ
                 </Link>

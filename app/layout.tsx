@@ -31,12 +31,24 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   applicationName: SITE_NAME,
+  // Google has ignored meta keywords since 2009, so this earns nothing on its
+  // own — it is a hint for the smaller engines that still read it. The terms
+  // that matter are the ones written into the visible copy and /guide.
+  //
+  // Generic terms only. Competitors' app and brand names are deliberately
+  // absent: using another company's mark to catch its traffic is trademark
+  // infringement, and App Store review rejects metadata that names rival apps.
   keywords: [
     "face yoga",
+    "face yoga at home",
     "facial exercise",
-    "jawline",
-    "face workout",
     "facial fitness",
+    "face workout",
+    "face scan",
+    "face score",
+    "jawline exercises",
+    "looksmaxxing",
+    "face yoga guide",
   ],
   // Every page here is canonical at its own path; setting it explicitly stops
   // a stray query string (ad trackers, share links) being indexed separately.

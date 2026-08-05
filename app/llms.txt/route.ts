@@ -1,5 +1,6 @@
 import { faqs } from "@/lib/faqs";
 import { zones } from "@/lib/zones";
+import { GUIDE_DESCRIPTION, GUIDE_TITLE } from "@/lib/guide";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/legal";
 import {
   DESCRIPTION,
@@ -79,6 +80,7 @@ ${questions}
 ## Pages
 
 - [Home](${SITE_URL}/): what the app does, how it works, the exercise catalogue and the FAQ.
+- [${GUIDE_TITLE}](${SITE_URL}/guide): ${GUIDE_DESCRIPTION} Also covers where looksmaxxing fits, and when to be careful.
 - [Privacy Policy](${SITE_URL}/privacy): what is collected, who receives it, and how to delete it.
 - [Terms of Use](${SITE_URL}/terms): what the app is and is not, results, responsibilities and liability.
 
