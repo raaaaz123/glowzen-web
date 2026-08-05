@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# glowzen-web
 
-## Getting Started
+The marketing site for **GlowZen**, an iOS app for facial exercise. Next.js 16
+(App Router, Turbopack) with Tailwind CSS 4.
 
-First, run the development server:
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm start       # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What's there |
+| --- | --- |
+| `app/` | Routes. `page.tsx` is the landing page; `guide/`, `privacy/`, `terms/` are the standalone pages. |
+| `components/` | One component per landing-page section, in the order they render. |
+| `lib/` | Content data — see below. |
+| `public/` | Screenshots, before/after images, app icon. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Content lives in `lib/`, not in components
 
-## Learn More
+The FAQ, the exercise catalogue and the site facts are each rendered by more
+than one consumer: the visible page, the JSON-LD structured data, and
+`/llms.txt`. Google treats structured data that disagrees with visible copy as
+spam, so those lists have exactly one home.
 
-To learn more about Next.js, take a look at the following resources:
+| File | Feeds |
+| --- | --- |
+| `lib/site.ts` | Name, URL, tagline, exercise/zone counts, App Store URL. |
+| `lib/faqs.ts` | The FAQ section, `FAQPage` markup, `/llms.txt`. |
+| `lib/zones.ts` | The Areas section, the guide, `/llms.txt`. Mirrors the app's catalogue. |
+| `lib/legal.ts` | `/privacy` and `/terms`. Mirrors `GlowFace/Views/Profile/LegalDocuments.swift` — edit both or neither. |
+| `lib/guide.ts` | `/guide`. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Change a fact in `lib/`, and the page, the markup and the plain-text summary
+all move together.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## SEO and GEO
 
-## Deploy on Vercel
+Generated at build time, all statically prerendered:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Route | Source |
+| --- | --- |
+| `/sitemap.xml` | `app/sitemap.ts` |
+| `/robots.txt` | `app/robots.ts` — allows AI crawlers deliberately |
+| `/llms.txt` | `app/llms.txt/route.ts` — plain-text brief for assistants |
+| `/opengraph-image` | `app/opengraph-image.tsx` — 1200×630, generated with `next/og` |
+| `/favicon.ico`, `/icon.png`, `/apple-icon.png` | `app/` file conventions |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Structured data is in `components/JsonLd.tsx` (home) and
+`components/GuideJsonLd.tsx` (guide).
+
+Two rules the copy follows, both deliberate:
+
+- **No invented testimonials.** `components/Reviews.tsx` documents this — fake
+  reviews breach the FTC's 16 CFR 465 and the UK DMCCA.
+- **No `aggregateRating` or `Review` markup.** A site may not mark up reviews
+  of itself, and there are no real ratings to cite yet.
+
+## Before launch
+
+- [ ] Set `APP_STORE_URL` in `lib/site.ts` — it fills the CTA button and the
+      `installUrl` in the structured data. The CTA links to `#` until then.
+- [ ] Submit `sitemap.xml` to Google Search Console and Bing Webmaster Tools.
+
+## Notes
+
+Next.js 16 has breaking changes from earlier versions — see `AGENTS.md`. Read
+the bundled docs in `node_modules/next/dist/docs/` before writing route or
+metadata code.
