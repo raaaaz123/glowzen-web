@@ -10,12 +10,14 @@ export default function Cta() {
         />
 
         <div className="relative">
+          {/* The icon is full-bleed pink, and this panel is a rose gradient —
+              without the white ring it dissolves into the background. */}
           <Image
             src="/glowzen-icon.png"
             alt=""
             width={88}
             height={88}
-            className="mx-auto rounded-[20px] shadow-lg"
+            className="mx-auto rounded-[20px] shadow-lg ring-[5px] ring-white/80"
           />
           <h2 className="font-display mt-7 text-4xl leading-[1.05] font-semibold text-balance text-white sm:text-6xl">
             Eight minutes a day. Start tonight.
