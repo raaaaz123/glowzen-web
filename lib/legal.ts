@@ -23,6 +23,8 @@ export type LegalDocument = {
 };
 
 export const LAST_UPDATED = "29 July 2026";
+/** The same date for machines (sitemap lastModified). Keep the two in step. */
+export const LAST_UPDATED_ISO = "2026-07-29";
 export const ENTITY = "GlowZen";
 export const CONTACT_EMAIL = "support@dietly.life";
 

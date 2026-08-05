@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "What GlowZen collects, why, who receives it, and how to delete it. No account, no email, no password.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function Page() {

@@ -7,6 +7,7 @@ import { terms } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description: "The terms that cover your use of the GlowZen app.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function Page() {

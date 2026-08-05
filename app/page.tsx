@@ -8,10 +8,12 @@ import Privacy from "@/components/Privacy";
 import Faq from "@/components/Faq";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <>
+      <JsonLd />
       <Nav />
       <main>
         <Hero />

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Nunito } from "next/font/google";
 import "./globals.css";
+import { DESCRIPTION, SITE_NAME, SITE_URL, TAGLINE } from "@/lib/site";
 
 // Nunito is the closest widely available match to SF Pro Rounded, which the
 // iOS app uses throughout.
@@ -20,17 +21,16 @@ const fraunces = Fraunces({
   axes: ["SOFT", "WONK", "opsz"],
 });
 
-const description =
-  "Sculpt, lift and glow — naturally, in just 8 minutes a day. GlowZen builds a personalised facial exercise plan and guides you through it with video demos and voice coaching.";
+const title = `${SITE_NAME} — ${TAGLINE}`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://glowzen.app"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "GlowZen — Facial exercise, personalised to your face",
-    template: "%s · GlowZen",
+    default: title,
+    template: `%s · ${SITE_NAME}`,
   },
-  description,
-  applicationName: "GlowZen",
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
   keywords: [
     "face yoga",
     "facial exercise",
@@ -38,17 +38,40 @@ export const metadata: Metadata = {
     "face workout",
     "facial fitness",
   ],
+  // Every page here is canonical at its own path; setting it explicitly stops
+  // a stray query string (ad trackers, share links) being indexed separately.
+  alternates: {
+    canonical: "/",
+    // Points assistants at the plain-text summary. Not part of any spec —
+    // llms.txt is found by convention at the root — but it costs one link tag
+    // and makes the file discoverable from any page.
+    types: { "text/plain": "/llms.txt" },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "GlowZen — Facial exercise, personalised to your face",
-    description,
+    title,
+    description: DESCRIPTION,
+    url: SITE_URL,
     type: "website",
-    siteName: "GlowZen",
+    siteName: SITE_NAME,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GlowZen — Facial exercise, personalised to your face",
-    description,
+    title,
+    description: DESCRIPTION,
   },
+  category: "health",
 };
 
 export const viewport: Viewport = {
