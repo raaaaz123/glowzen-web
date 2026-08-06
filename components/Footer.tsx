@@ -68,11 +68,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/support" className="hover:text-rose-deep">
+                  Support
+                </Link>
+              </li>
+              <li>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
                   className="hover:text-rose-deep"
                 >
-                  Support
+                  Contact
                 </a>
               </li>
             </ul>

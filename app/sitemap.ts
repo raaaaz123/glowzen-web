@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/site";
 import { LAST_UPDATED_ISO } from "@/lib/legal";
 
 /**
- * Three pages, so no need for generateSitemaps or splitting.
+ * A handful of pages, so no need for generateSitemaps or splitting.
  *
  * The legal pages take their lastModified from the documents themselves —
  * a sitemap that claims a page changed when it didn't teaches crawlers to
@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/support`,
+      lastModified: legalUpdated,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
     {
       url: `${SITE_URL}/privacy`,

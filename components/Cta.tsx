@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { CONTACT_EMAIL, REPLY_WINDOW } from "@/lib/legal";
 
 export default function Cta() {
   return (
@@ -39,6 +41,28 @@ export default function Cta() {
           <p className="mt-6 text-sm font-semibold text-white/75">
             iPhone · iOS 17 or later
           </p>
+
+          {/* The support address, on the page a reviewer and a stuck user are
+              both most likely to land on. Hidden behind a link on the footer
+              only is not "shown". */}
+          <div className="mt-10 border-t border-white/25 pt-8">
+            <p className="text-[15px] font-semibold text-white/90">
+              Questions, or something not working? Email{" "}
+              <a
+                href={`mailto:${CONTACT_EMAIL}?subject=GlowZen%20support`}
+                className="font-extrabold break-all text-white underline underline-offset-4"
+              >
+                {CONTACT_EMAIL}
+              </a>{" "}
+              — a person replies within {REPLY_WINDOW}.
+            </p>
+            <Link
+              href="/support"
+              className="mt-3 inline-block text-[15px] font-bold text-white/85 underline underline-offset-4 hover:text-white"
+            >
+              Read the support page →
+            </Link>
+          </div>
         </div>
       </div>
     </section>

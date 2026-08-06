@@ -65,12 +65,15 @@ ${catalogue}
 
 ## Privacy
 
-- No name, email address or phone number is collected. Identity is a random per-device identifier.
-- Photos are held in private encrypted storage and served over links that expire after a few minutes.
+- No email address or phone number is collected. Identity is a random per-device UUID held in the Keychain.
+- Your first name never leaves the device — it is stored locally and used only to greet you.
+- Photos are held in private encrypted storage and served over signed links that expire after fifteen minutes.
 - The face scan is never used to train a model and is never shown to another user.
-- Location is never collected, and location tags are stripped from photos before storage.
+- Location is never collected, and EXIF is stripped from photos before storage.
+- No tracking, no ads, no advertising identifier, no data brokers — which is why the app never shows the App Tracking Transparency prompt.
+- Analytics is first-party (Mixpanel), covering app events and masked session replay. It is never used for advertising.
 - Data is never sold, rented or traded.
-- "Delete my data" in settings removes the plan, history and every photo immediately and irreversibly.
+- "Delete my data" in settings removes the profile, plan, scans, history, chat and every photo immediately and irreversibly.
 - Full policy: ${SITE_URL}/privacy (last updated ${LAST_UPDATED}).
 
 ## FAQ
@@ -83,6 +86,7 @@ ${questions}
 - [${GUIDE_TITLE}](${SITE_URL}/guide): ${GUIDE_DESCRIPTION} Also covers where looksmaxxing fits, and when to be careful.
 - [Privacy Policy](${SITE_URL}/privacy): what is collected, who receives it, and how to delete it.
 - [Terms of Use](${SITE_URL}/terms): what the app is and is not, results, responsibilities and liability.
+- [Support](${SITE_URL}/support): requirements, permissions, reminders, progress photos and deleting your data.
 
 ## Contact
 
