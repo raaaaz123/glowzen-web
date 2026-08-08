@@ -29,7 +29,7 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "88px",
-          backgroundImage: "linear-gradient(135deg, #fffbf9, #fdeef1)",
+          backgroundImage: "linear-gradient(135deg, #ffffff, #fcfbfe)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
@@ -41,7 +41,7 @@ export default async function Image() {
             alt=""
             style={{ borderRadius: "26px" }}
           />
-          <span style={{ fontSize: 54, fontWeight: 800, color: "#26202b" }}>
+          <span style={{ fontSize: 54, fontWeight: 800, color: "#1b1b2e" }}>
             {SITE_NAME}
           </span>
         </div>
@@ -56,7 +56,7 @@ export default async function Image() {
             marginTop: "44px",
             fontSize: 80,
             fontWeight: 700,
-            color: "#26202b",
+            color: "#1b1b2e",
           }}
         >
           <div style={{ display: "flex" }}>Sculpt, lift &amp; glow</div>
@@ -68,7 +68,7 @@ export default async function Image() {
             display: "flex",
             marginTop: "36px",
             fontSize: 36,
-            color: "#635a6b",
+            color: "#5c5a70",
           }}
         >
           Eight minutes a day. No equipment, no procedures.
@@ -83,7 +83,7 @@ export default async function Image() {
                 padding: "16px 32px",
                 borderRadius: "999px",
                 backgroundColor: "#ffffff",
-                color: "#e14c82",
+                color: "#7d53dd",
                 fontSize: 30,
                 fontWeight: 700,
               }}

@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
-/* GlowZen — "Rose Quartz & Cream".
+/* GlowZen — "Violet".
    These tokens mirror GlowFace/Utilities/Theme.swift so the site and the app
-   read as one brand. Only change a value here if it changes there too. */
+   read as one brand. Only change a value here if it changes there too.
+
+   The app moved its shipping palette from `.roseQuartz` to `.violet`
+   (`GFTheme.fallback`) to agree with the app icon, and this file had been left
+   on rose — a violet icon opening a violet app, linked from a pink website.
+
+   ## Why the names still say "rose"
+
+   They are literal-name aliases for palette *roles*, not claims about hue, and
+   the app does exactly the same thing: `GFColors.pink` returns the accent, so
+   under `.blueLight` "pink" is blue. Renaming `--color-rose` to
+   `--color-violet` would touch ~200 call sites across every page and component
+   for no rendered difference, and would have to be redone the next time the
+   palette moves. Read `rose` as "the accent", `orchid` as "the alternate
+   accent", and `cream` as "the page".
+
+   Role mapping, for the next person diffing the two files:
+     rose        -> accent          orchid  -> accentAlt
+     rose-light  -> accent +10% white   (GFGradients.primary's first stop)
+     rose-deep   -> accent -10% black   (GFGradients.primary's second stop)
+     cream       -> bgPrimary        cream-deep -> bgSecondary
+     ink/-soft/-muted -> textPrimary/Secondary/Tertiary
+     coral -> accentWarm             mint -> accentCool */
 @theme {
-  --color-blush: #fbd3de;
+  --color-blush: #e4dbfb;
+  /* Unchanged on purpose: champagne is the one colour that stays gold in every
+     palette, because the premium marks need a warm metal to read against. */
   --color-champagne: #e4b57e;
-  --color-pearl: #fff6ef;
+  --color-pearl: #f8f5ff;
 
-  --color-cream: #fffbf9;
-  --color-cream-deep: #fdeef1;
+  --color-cream: #ffffff;
+  --color-cream-deep: #fcfbfe;
 
-  --color-ink: #26202b;
-  --color-ink-soft: #635a6b;
-  --color-ink-muted: #a79fae;
+  --color-ink: #1b1b2e;
+  --color-ink-soft: #5c5a70;
+  --color-ink-muted: #9e9cb0;
 
-  --color-rose: #ea5a8b;
-  --color-rose-light: #f26a9c;
-  --color-rose-deep: #e14c82;
-  --color-orchid: #9b72e0;
+  --color-rose: #8b5cf6;
+  --color-rose-light: #976cf7;
+  --color-rose-deep: #7d53dd;
+  --color-orchid: #6366f1;
   --color-coral: #ff8a6b;
-  --color-mint: #3fbf9e;
+  --color-mint: #2fbfae;
 
   --font-sans: var(--font-nunito), ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
   --font-display: var(--font-fraunces), Georgia, serif;
@@ -28,18 +52,29 @@
   --radius-card: 26px;
   --radius-hero: 34px;
 
-  --shadow-card: 0 12px 22px -8px rgb(197 106 136 / 0.14), 0 2px 5px rgb(0 0 0 / 0.04);
-  --shadow-lift: 0 20px 40px -12px rgb(197 106 136 / 0.3);
+  /* Violet's `cardShadow` is #6D5BA8 at 0.16 — a touch heavier than rose's,
+     because the page behind it is now white and the shadow is the only thing
+     lifting a card off it. */
+  --shadow-card: 0 12px 22px -8px rgb(109 91 168 / 0.16), 0 2px 5px rgb(0 0 0 / 0.04);
+  --shadow-lift: 0 20px 40px -12px rgb(109 91 168 / 0.3);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+/* Rose ran these washes at 0.55 and 0.9, which is what produced the warm cream
+   page. Violet sets `glowStrength: 0` — in the app the tinted background
+   circles are switched off entirely and the page is plain white.
+
+   Matching that literally would leave a marketing page dead flat, so the washes
+   are kept at roughly a third of their old strength: enough to keep some light
+   in the corners, faint enough that the page still reads as white rather than
+   as lilac. Delete these two lines for exact parity with the app. */
 body {
   background:
-    radial-gradient(60rem 40rem at 85% -10%, rgb(251 211 222 / 0.55), transparent 60%),
-    radial-gradient(50rem 35rem at 5% 5%, rgb(255 246 239 / 0.9), transparent 55%),
+    radial-gradient(60rem 40rem at 85% -10%, rgb(228 219 251 / 0.30), transparent 60%),
+    radial-gradient(50rem 35rem at 5% 5%, rgb(248 245 255 / 0.70), transparent 55%),
     linear-gradient(to bottom, var(--color-cream), var(--color-cream-deep));
   background-attachment: fixed;
   color: var(--color-ink);
@@ -73,13 +108,14 @@ body {
 
 @utility card-surface {
   background-color: #fff;
-  border: 1px solid rgb(38 32 43 / 0.06);
+  /* Hairline derived from the new ink (#1B1B2E), not the old plum-black. */
+  border: 1px solid rgb(27 27 46 / 0.06);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
 }
 
-/* Visible keyboard focus everywhere, since the brand pink on cream is low
-   contrast for a default outline. */
+/* Visible keyboard focus everywhere, since the brand accent on a near-white
+   page is low contrast for a default outline. */
 :focus-visible {
   outline: 3px solid var(--color-rose-deep);
   outline-offset: 3px;

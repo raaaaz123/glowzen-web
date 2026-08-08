@@ -43,7 +43,7 @@ export default function Nav() {
 
         <a
           href="#get"
-          className="gradient-rose rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(225,76,130,0.6)] transition-transform hover:-translate-y-0.5"
+          className="gradient-rose rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5"
         >
           Get the app
         </a>
