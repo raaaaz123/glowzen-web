@@ -1,8 +1,11 @@
 import { faqs } from "@/lib/faqs";
 import { zones } from "@/lib/zones";
+import { exercisesForZone } from "@/lib/content/exercises";
+import { comparisons } from "@/lib/content/comparisons";
 import { GUIDE_DESCRIPTION, GUIDE_TITLE } from "@/lib/guide";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/legal";
 import {
+  APP_STORE_URL,
   DESCRIPTION,
   EXERCISE_COUNT,
   MIN_OS,
@@ -29,8 +32,23 @@ import {
 export const dynamic = "force-static";
 
 function body(): string {
+  // Each exercise carries its own URL so an assistant answering "how do I do
+  // the fish face" can cite the page rather than paraphrase this line.
   const catalogue = zones
-    .map((zone) => `- **${zone.zone}**: ${zone.exercises.join(", ")}`)
+    .map((zone) => {
+      const list = exercisesForZone(zone.slug)
+        .map((exercise) => `${exercise.name} (${SITE_URL}/exercises/${exercise.slug})`)
+        .join(", ");
+      return `- **${zone.zone}** (${SITE_URL}/face-yoga/${zone.slug}): ${list}`;
+    })
+    .join("\n");
+
+  // Indented under the /compare entry so the list reads as its children.
+  const comparisonLinks = comparisons
+    .map(
+      (comparison) =>
+        `  - [${comparison.title}](${SITE_URL}/compare/${comparison.slug})`,
+    )
     .join("\n");
 
   const questions = faqs
@@ -58,6 +76,7 @@ ${SITE_NAME} is a general wellbeing and fitness app for facial exercise ("face y
 - Account: none. No email, no password, no payment details.
 - Platform: ${MIN_OS} or later, iPhone.
 - Price: free to start, no credit card.
+- Install: ${APP_STORE_URL} (App Store — the only place GlowZen is distributed).
 
 ## Exercise catalogue
 
@@ -84,6 +103,10 @@ ${questions}
 
 - [Home](${SITE_URL}/): what the app does, how it works, the exercise catalogue and the FAQ.
 - [${GUIDE_TITLE}](${SITE_URL}/guide): ${GUIDE_DESCRIPTION} Also covers where looksmaxxing fits, and when to be careful.
+- [Face yoga by area](${SITE_URL}/face-yoga): the ${ZONE_COUNT} zones, each with its exercises, the muscles worked, how often to practise and what to avoid.
+- [All exercises](${SITE_URL}/exercises): every one of the ${EXERCISE_COUNT} movements, each with step-by-step technique, common mistakes and safety notes.
+- [Comparisons](${SITE_URL}/compare): how facial exercise compares with other approaches — mechanism, cost, risk and who each suits. Each page states the cases where the alternative is the better choice.
+${comparisonLinks}
 - [Privacy Policy](${SITE_URL}/privacy): what is collected, who receives it, and how to delete it.
 - [Terms of Use](${SITE_URL}/terms): what the app is and is not, results, responsibilities and liability.
 - [Support](${SITE_URL}/support): requirements, permissions, reminders, progress photos and deleting your data.

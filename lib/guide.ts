@@ -13,6 +13,7 @@
  */
 
 import { zones } from "@/lib/zones";
+import { exercisesForZone } from "@/lib/content/exercises";
 import { EXERCISE_COUNT, SESSION_MINUTES, ZONE_COUNT } from "@/lib/site";
 
 export type GuideSection = {
@@ -68,7 +69,10 @@ export const guideSections: GuideSection[] = [
       `Almost every face yoga routine divides the face into zones, because the muscles group that way. These are the ${ZONE_COUNT} GlowZen uses, and the ${EXERCISE_COUNT} exercises that sit under them.`,
     ],
     bullets: zones.map(
-      (zone) => `${zone.zone} — ${zone.exercises.join(", ")}.`,
+      (zone) =>
+        `${zone.zone} — ${exercisesForZone(zone.slug)
+          .map((exercise) => exercise.name)
+          .join(", ")}.`,
     ),
   },
   {
