@@ -1,25 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Nunito } from "next/font/google";
 import "./globals.css";
-import { DESCRIPTION, SITE_NAME, SITE_URL, TAGLINE } from "@/lib/site";
-
-// Nunito is the closest widely available match to SF Pro Rounded, which the
-// iOS app uses throughout.
-const nunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Fraunces carries the headlines. Its soft, slightly wonky serif reads as
-// beauty-editorial rather than clinical, and the SOFT axis keeps it in the
-// same rounded family of shapes as the app's SF Pro Rounded.
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
-});
+import {
+  APP_STORE_ID,
+  DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  TAGLINE,
+} from "@/lib/site";
 
 const title = `${SITE_NAME} — ${TAGLINE}`;
 
@@ -83,6 +70,10 @@ export const metadata: Metadata = {
     title,
     description: DESCRIPTION,
   },
+  // Safari on iOS turns this into a native install banner above the page, with
+  // the real icon, rating and an Open/Get button. It is the shortest path from
+  // the site to the App Store on the one platform the app runs on.
+  itunes: { appId: APP_STORE_ID },
   category: "health",
 };
 
@@ -96,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunito.variable} ${fraunces.variable} h-full`}>
+    <html lang="en" className="h-full">
       <body className="flex min-h-full flex-col font-sans antialiased">
         {children}
       </body>

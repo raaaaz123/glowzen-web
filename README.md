@@ -63,8 +63,10 @@ Two rules the copy follows, both deliberate:
 
 ## Before launch
 
-- [ ] Set `APP_STORE_URL` in `lib/site.ts` — it fills the CTA button and the
-      `installUrl` in the structured data. The CTA links to `#` until then.
+- [x] Set `APP_STORE_URL` in `lib/site.ts` — it fills the install buttons, the
+      `installUrl` in the structured data and the `Install:` line in llms.txt.
+      `APP_STORE_ID` next to it feeds Safari's install banner via the `itunes`
+      metadata in `app/layout.tsx`.
 - [ ] Submit `sitemap.xml` to Google Search Console and Bing Webmaster Tools.
 
 ## Notes

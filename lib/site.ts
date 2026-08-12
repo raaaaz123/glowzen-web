@@ -22,8 +22,15 @@ export const ZONE_COUNT = 7;
 export const SESSION_MINUTES = 8;
 
 /**
- * The App Store listing. Still empty while the app is in review — the Cta
- * button and the structured data both key off this, so filling it in here is
- * the only edit needed when the listing goes live.
+ * The App Store listing, live since the app shipped. Every install button, the
+ * structured data and llms.txt all key off this one constant, so a change to
+ * the listing URL is a one-line edit here.
  */
-export const APP_STORE_URL = "";
+export const APP_STORE_URL =
+  "https://apps.apple.com/us/app/glowzen-face-yoga-glow-up/id6795989775";
+
+/**
+ * The numeric half of the same listing. Safari's install banner takes the id on
+ * its own rather than a URL, which is the only reason this is separate.
+ */
+export const APP_STORE_ID = "6795989775";

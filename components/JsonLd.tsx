@@ -48,9 +48,10 @@ export default function JsonLd() {
       applicationCategory: "HealthApplication",
       applicationSubCategory: "Facial exercise",
       operatingSystem: `${MIN_OS} or later`,
-      // The listing URL is empty until the app ships; omit the key rather than
-      // emitting an empty string, which validators flag.
-      ...(APP_STORE_URL ? { installUrl: APP_STORE_URL } : {}),
+      // Still guarded: an empty string here is worse than a missing key, since
+      // validators flag it, and this is the constant most likely to be blanked
+      // out again if the listing ever gets pulled.
+      ...(APP_STORE_URL ? { installUrl: APP_STORE_URL, downloadUrl: APP_STORE_URL } : {}),
       offers: {
         "@type": "Offer",
         price: "0",
