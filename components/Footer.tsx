@@ -35,8 +35,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#areas" className="hover:text-rose-deep">
-                  Areas
+                <Link href="/face-yoga" className="hover:text-rose-deep">
+                  Face yoga by area
+                </Link>
+              </li>
+              <li>
+                <Link href="/exercises" className="hover:text-rose-deep">
+                  All exercises
+                </Link>
+              </li>
+              <li>
+                <Link href="/compare" className="hover:text-rose-deep">
+                  Compare
                 </Link>
               </li>
               <li>

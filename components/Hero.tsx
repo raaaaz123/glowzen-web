@@ -1,44 +1,61 @@
-import BeforeAfter from "./BeforeAfter";
+import AppleIcon from "./AppleIcon";
+import PhoneFrame from "./PhoneFrame";
+import { APP_STORE_URL, TAGLINE } from "@/lib/site";
 
+/* Benefit, not spec. "18 guided exercises" is a number we care about; "eight
+   minutes, before your coffee goes cold" is a thing the reader can picture
+   themselves doing tomorrow. */
 const pills = [
-  { label: "8 min/day" },
-  { label: "18 guided exercises" },
-  { label: "No needles" },
-  { label: "Made for you" },
+  { label: "Eight minutes, not an hour" },
+  { label: "No needles, no clinic" },
+  { label: "Nobody has to know" },
+  { label: "Built around your face" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden px-5 pt-16 pb-20 sm:px-8 sm:pt-24 sm:pb-28">
+    <section className="relative overflow-hidden px-5 pt-12 pb-14 sm:px-8 sm:pt-16 sm:pb-20">
       {/* Decorative wash. aria-hidden: conveys nothing to a screen reader. */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full bg-blush/40 blur-3xl"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-8">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-rose/15 bg-white/70 px-4 py-1.5 text-[13px] font-bold tracking-wide text-rose-deep uppercase">
-            Facial fitness, personalised
+            {TAGLINE}
           </p>
 
-          <h1 className="font-display mt-7 text-[3rem] leading-[1.02] font-semibold text-balance sm:text-[4.25rem]">
-            Sculpt, lift &amp; glow —{" "}
+          {/* Short aspirational headline, mechanism moved to the line below —
+              the split this category converts on.
+
+              "Glow" rather than "potential": glow is the brand's own word, and
+              "maximise your potential" is the sentence a competitor already
+              runs, so borrowing it would spend our headline making someone
+              else's point.
+
+              It reads as puffery, which is exactly why it is safe. A vague
+              aspiration is not a claim anyone has to substantiate, where "look
+              5 years younger" would be. "Naturally" carries the no-needles
+              differentiator in one word. */}
+          <h1 className="font-display mt-6 text-[2.75rem] leading-[1.05] font-semibold text-balance sm:text-[4rem]">
+            Maximise your glow,{" "}
             <span className="text-gradient-rose">naturally</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-            GlowZen scans your face, builds a plan around the areas you care
-            about, and coaches you through it — eight minutes a day, no
-            equipment, no procedures.
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-soft">
+            A face scan, a plan built around it, and eight minutes a day —
+            guided by video and voice. No equipment, no clinic, no account.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
-              href="#get"
-              className="gradient-rose rounded-full px-8 py-4 text-base font-bold text-white shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
+              href={APP_STORE_URL}
+              className="gradient-rose inline-flex items-center gap-2.5 rounded-full px-8 py-4 text-base font-bold text-white shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
             >
-              Start my glow-up →
+              <AppleIcon />
+              Download app
             </a>
             <a
               href="#how"
@@ -47,10 +64,6 @@ export default function Hero() {
               See how it works
             </a>
           </div>
-
-          <p className="mt-5 text-sm font-semibold text-ink-muted">
-            🔒 Free to start · No credit card needed
-          </p>
 
           <ul className="mt-10 flex flex-wrap gap-2.5">
             {pills.map((pill) => (
@@ -64,36 +77,34 @@ export default function Hero() {
           </ul>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm">
+        {/* Two overlapping phones, tilted, running off the right edge — the
+            arrangement that reads as "this is an app" faster than any sentence
+            can. The container clips rather than scrolls: `overflow-hidden` on
+            the section means the bleed costs no horizontal scrollbar, which is
+            the usual way this layout breaks on a phone.
+
+            On small screens the tilt and the overlap are dropped entirely and
+            the front phone is centred. A 12-degree rotation that looks
+            deliberate at 1200px looks like a rendering fault at 380px. */}
+        <div className="relative flex justify-center lg:h-[34rem] lg:justify-end">
           <div
             aria-hidden
-            className="absolute inset-6 rounded-[3rem] bg-rose/20 blur-3xl"
+            className="pointer-events-none absolute inset-8 rounded-[4rem] bg-rose/20 blur-3xl"
           />
-          <div className="relative">
-            <BeforeAfter />
-            <p className="mt-4 text-center text-sm font-bold text-ink-soft">
-              Drag to compare
-            </p>
-            <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-              {[
-                { value: "18", label: "Exercises" },
-                { value: "7", label: "Face zones" },
-                { value: "8 min", label: "A day" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl bg-white p-3 shadow-[var(--shadow-card)]"
-                >
-                  <p className="text-xl font-extrabold text-rose-deep">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs font-bold text-ink-muted">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+
+          <PhoneFrame
+            src="/screen-dashboard.png"
+            alt="GlowZen — today's session, with the plan and streak on one screen"
+            sizes="(max-width: 1024px) 0px, 248px"
+            className="absolute top-6 right-0 hidden max-w-[224px] rotate-[8deg] opacity-95 lg:block"
+          />
+
+          <PhoneFrame
+            src="/screen-welcome.png"
+            alt="GlowZen — the welcome screen, where you pick your goals and focus areas"
+            priority
+            className="relative lg:absolute lg:top-16 lg:right-40 lg:-rotate-[6deg]"
+          />
         </div>
       </div>
     </section>

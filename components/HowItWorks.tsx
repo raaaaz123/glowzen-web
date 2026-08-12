@@ -1,52 +1,66 @@
+import SectionHeading from "./SectionHeading";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+/* Each step answers "what does this do for me", not "what does the app have".
+   The mechanism is still named — it has to be, the structured data restates it
+   — but it arrives after the reason to care. */
 const steps = [
   {
     step: "01",
-    title: "Scan your face",
-    body: "A single selfie is analysed for tone, definition and symmetry across seven zones. It never leaves your private storage, and it is never shown to anyone else.",
+    title: "Stop guessing what your face needs",
+    body: "One selfie, and you know which areas are actually worth your time — no more copying a routine built for someone else's face off the internet.",
   },
   {
     step: "02",
-    title: "Get your plan",
-    body: "Answer a few questions — your goals, focus areas, experience and the time you can give — and GlowZen assembles a routine from its exercise library.",
+    title: "Get a routine that fits your life",
+    body: "Tell us how much time you really have, not how much you wish you had. The plan is built to survive a bad week, because that is the week most people quit.",
   },
   {
     step: "03",
-    title: "Practise daily",
-    body: "Each session plays a video demonstration with spoken cues and a timer, so you can follow along hands-free and keep your form honest.",
+    title: "Never wonder if you are doing it right",
+    body: "A video plays, a voice counts you through the hold. Hands stay on your face, eyes can close, and you stop second-guessing your form in the mirror.",
   },
   {
     step: "04",
-    title: "Watch it change",
-    body: "Progress photos sit side by side, streaks and badges track consistency, and your zone scores update as you go.",
+    title: "See it, instead of hoping",
+    body: "Eight weeks is a long time to go on a feeling. Your photos sit side by side, so you can look rather than wonder whether anything is happening at all.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28">
+    <section id="how" className="scroll-mt-24 px-5 py-14 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="text-xs font-extrabold tracking-[0.18em] text-rose-deep uppercase">
-            How it works
-          </p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.1] font-semibold text-balance sm:text-5xl">
-            Four steps, then eight minutes a day
-          </h2>
-          <p className="mt-4 text-lg text-ink-soft">
-            No guesswork about which exercises to do or how long to hold them.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="How it works"
+          title={
+            <>
+              From &ldquo;I should do something&rdquo; to actually doing it
+            </>
+          }
+          lead="Most people give up because nobody told them what to do, or for how long. That is the part we take off your hands."
+        />
 
-        <ol className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((item) => (
-            <li key={item.step} className="card-surface p-7">
-              <span className="gradient-rose inline-flex h-11 w-11 items-center justify-center rounded-2xl text-sm font-extrabold text-white">
-                {item.step}
-              </span>
-              <h3 className="mt-5 text-lg font-extrabold">{item.title}</h3>
-              <p className="mt-2.5 text-[15px] leading-relaxed text-ink-soft">
-                {item.body}
-              </p>
+            <li key={item.step} className="flex">
+              <Card className="w-full">
+                <CardHeader>
+                  <span
+                    aria-hidden
+                    className="gradient-rose mb-2 inline-flex size-10 items-center justify-center rounded-xl text-[13px] font-extrabold text-white"
+                  >
+                    {item.step}
+                  </span>
+                  <CardTitle className="text-[17px]">{item.title}</CardTitle>
+                  <CardDescription>{item.body}</CardDescription>
+                </CardHeader>
+              </Card>
             </li>
           ))}
         </ol>

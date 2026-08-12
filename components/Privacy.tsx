@@ -1,4 +1,14 @@
 import Link from "next/link";
+import { ArrowUpRight, Check } from "lucide-react";
+
+import SectionHeading from "./SectionHeading";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const promises = [
   {
@@ -21,47 +31,42 @@ const promises = [
 
 export default function Privacy() {
   return (
-    <section className="px-5 py-20 sm:px-8 sm:py-28">
+    <section className="px-5 py-14 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-[var(--radius-hero)] border border-ink/5 bg-white/70 p-8 backdrop-blur-sm sm:p-14">
-          <div className="max-w-2xl">
-            <p className="text-xs font-extrabold tracking-[0.18em] text-rose-deep uppercase">
-              Your face, your data
-            </p>
-            <h2 className="font-display mt-4 text-4xl leading-[1.1] font-semibold text-balance sm:text-5xl">
-              Built to know as little about you as possible
-            </h2>
-            <p className="mt-4 text-lg text-ink-soft">
-              Facial photos are sensitive, so the app is designed to hold the
-              minimum it needs to work.
-            </p>
+        <div className="rounded-[var(--radius-hero)] border border-border bg-white/70 p-6 backdrop-blur-sm sm:p-12">
+          <SectionHeading
+            eyebrow="Your face, your data"
+            title="Built to know as little about you as possible"
+            lead="You should not have to trade your face for a routine. No account, no email, nothing sold — and one button that deletes the lot."
+          />
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {promises.map((promise) => (
+              <Card key={promise.title} className="bg-white">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2.5 text-[17px]">
+                    <span
+                      aria-hidden
+                      className="gradient-rose inline-flex size-6 shrink-0 items-center justify-center rounded-full text-white"
+                    >
+                      <Check className="size-3.5" strokeWidth={3} />
+                    </span>
+                    {promise.title}
+                  </CardTitle>
+                  <CardDescription className="pl-[2.15rem]">
+                    {promise.body}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
           </div>
 
-          <dl className="mt-12 grid gap-8 sm:grid-cols-2">
-            {promises.map((promise) => (
-              <div key={promise.title}>
-                <dt className="flex items-center gap-2.5 text-lg font-extrabold">
-                  <span
-                    aria-hidden
-                    className="gradient-rose inline-flex h-6 w-6 items-center justify-center rounded-full text-xs text-white"
-                  >
-                    ✓
-                  </span>
-                  {promise.title}
-                </dt>
-                <dd className="mt-2 pl-9 text-[15px] leading-relaxed text-ink-soft">
-                  {promise.body}
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          <Link
-            href="/privacy"
-            className="mt-10 inline-block text-[15px] font-bold text-rose-deep underline underline-offset-4"
-          >
-            Read the full privacy policy →
-          </Link>
+          <Button asChild variant="link" className="mt-8 px-0">
+            <Link href="/privacy">
+              Read the full privacy policy
+              <ArrowUpRight aria-hidden className="size-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

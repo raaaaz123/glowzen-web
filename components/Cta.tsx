@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import AppleIcon from "./AppleIcon";
 import { CONTACT_EMAIL, REPLY_WINDOW } from "@/lib/legal";
+import { APP_STORE_URL } from "@/lib/site";
 
 export default function Cta() {
   return (
-    <section id="get" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28">
+    <section id="get" className="scroll-mt-24 px-5 py-14 sm:px-8 sm:py-20">
       <div className="gradient-rose relative mx-auto max-w-6xl overflow-hidden rounded-[var(--radius-hero)] px-8 py-16 text-center shadow-[var(--shadow-lift)] sm:px-14 sm:py-20">
         <div
           aria-hidden
@@ -22,18 +24,19 @@ export default function Cta() {
             className="mx-auto rounded-[20px] shadow-lg ring-[5px] ring-white/80"
           />
           <h2 className="font-display mt-7 text-4xl leading-[1.05] font-semibold text-balance text-white sm:text-6xl">
-            Eight minutes a day. Start tonight.
+            Tomorrow morning, do something about it
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg text-white/90">
-            Free to start, no credit card, no account to create.
+            Eight minutes, before the coffee goes cold. Free to start, no card,
+            no account — and nobody has to know you are doing it.
           </p>
 
           <div className="mt-9 flex flex-wrap justify-center gap-3">
-            {/* TODO: swap for the real App Store URL once the listing is live. */}
             <a
-              href="#"
-              className="rounded-full bg-white px-8 py-4 text-base font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5"
+              href={APP_STORE_URL}
+              className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-base font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5"
             >
+              <AppleIcon />
               Download on the App Store
             </a>
           </div>

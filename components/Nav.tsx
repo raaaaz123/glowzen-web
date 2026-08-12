@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import AppleIcon from "./AppleIcon";
+import { APP_STORE_URL } from "@/lib/site";
 
 const links = [
   { href: "/#how", label: "How it works" },
-  { href: "/#tour", label: "Inside the app" },
-  { href: "/#areas", label: "Areas" },
+  { href: "/face-yoga", label: "By area" },
+  { href: "/exercises", label: "Exercises" },
+  { href: "/compare", label: "Compare" },
   { href: "/guide", label: "Guide" },
   { href: "/#faq", label: "FAQ" },
 ];
@@ -41,10 +44,14 @@ export default function Nav() {
           ))}
         </ul>
 
+        {/* Straight to the listing, not to #get. The section it used to scroll
+            to exists to sell the app; a visitor who has already decided should
+            not have to read it again to find the button. */}
         <a
-          href="#get"
-          className="gradient-rose rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5"
+          href={APP_STORE_URL}
+          className="gradient-rose inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5"
         >
+          <AppleIcon />
           Get the app
         </a>
       </nav>

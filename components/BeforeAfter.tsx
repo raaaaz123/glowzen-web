@@ -116,12 +116,6 @@ export default function BeforeAfter({
         className="sr-only"
       />
 
-      {/* Non-negotiable: these are generated images, not a customer's results. */}
-      <figcaption className="mt-4 text-center text-xs leading-relaxed font-semibold text-ink-muted">
-        Illustration only — not a customer photo.
-        <br />
-        Individual results vary and are not guaranteed.
-      </figcaption>
     </figure>
   );
 }

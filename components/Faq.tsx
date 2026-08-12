@@ -1,36 +1,45 @@
+import { ChevronDown } from "lucide-react";
+
+import SectionHeading from "./SectionHeading";
 import { faqs } from "@/lib/faqs";
 
+/**
+ * Styled as a shadcn Accordion, built on native `<details>`.
+ *
+ * The visual language is the accordion's — same border rule, same chevron,
+ * same type — but Radix's Accordion does not render a closed panel's content
+ * at all, and these answers are the visible half of the `FAQPage` markup in
+ * `components/JsonLd.tsx`. Structured data whose text is absent from the page
+ * is exactly what Google treats as spam, so the content has to be in the HTML
+ * whether or not the panel is open.
+ *
+ * `<details>` gives that for free, plus keyboard and screen-reader behaviour
+ * we would otherwise be reimplementing, and no JavaScript at all.
+ */
 export default function Faq() {
   return (
-    <section id="faq" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28">
+    <section id="faq" className="scroll-mt-24 px-5 py-14 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-3xl">
-        <div className="text-center">
-          <p className="text-xs font-extrabold tracking-[0.18em] text-rose-deep uppercase">
-            Questions
-          </p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.1] font-semibold text-balance sm:text-5xl">
-            The things people ask first
-          </h2>
-        </div>
+        <SectionHeading
+          eyebrow="Questions"
+          title="The doubts worth having"
+          align="center"
+        />
 
-        <div className="mt-12 space-y-3.5">
+        <div className="mt-10 border-t border-border">
           {faqs.map((faq) => (
             <details
               key={faq.q}
-              className="card-surface group px-6 py-5 [&_summary::-webkit-details-marker]:hidden"
+              className="group border-b border-border [&_summary::-webkit-details-marker]:hidden"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-[17px] font-extrabold">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 py-4 text-left text-[17px] font-bold leading-snug transition-colors hover:text-rose-deep">
                 {faq.q}
-                <span
+                <ChevronDown
                   aria-hidden
-                  className="shrink-0 text-2xl leading-none font-light text-rose-deep transition-transform group-open:rotate-45"
-                >
-                  +
-                </span>
+                  className="mt-1 size-4 shrink-0 text-ink-muted transition-transform duration-200 group-open:rotate-180"
+                />
               </summary>
-              <p className="mt-3.5 text-[15px] leading-relaxed text-ink-soft">
-                {faq.a}
-              </p>
+              <p className="pb-4 leading-relaxed text-ink-soft">{faq.a}</p>
             </details>
           ))}
         </div>

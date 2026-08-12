@@ -1,4 +1,8 @@
 import Image from "next/image";
+import { Star } from "lucide-react";
+
+import SectionHeading from "./SectionHeading";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 /**
  * Reviews.
@@ -85,16 +89,13 @@ export default function Reviews() {
   if (reviews.length === 0) return null;
 
   return (
-    <section className="px-5 py-20 sm:px-8 sm:py-28">
+    <section className="px-5 py-14 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-extrabold tracking-[0.18em] text-rose-deep uppercase">
-            In their words
-          </p>
-          <h2 className="font-display mt-4 text-4xl leading-[1.1] font-semibold text-balance sm:text-5xl">
-            What people say after a month
-          </h2>
-        </div>
+        <SectionHeading
+          eyebrow="In their words"
+          title="What people say after a month"
+          align="center"
+        />
 
         {needsRealContent && (
           <p className="mx-auto mt-8 max-w-2xl rounded-2xl border border-coral/30 bg-coral/10 px-5 py-3 text-center text-sm font-bold text-ink">
@@ -104,27 +105,37 @@ export default function Reviews() {
           </p>
         )}
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-11 grid gap-4 md:grid-cols-3">
           {reviews.map((review, index) => (
-            <figure key={index} className="card-surface flex flex-col p-8">
-              <div aria-hidden className="tracking-widest text-champagne">
-                ★★★★★
-              </div>
+            <Card key={index} asChild>
+              <figure>
+                <CardContent className="flex-1 p-6">
+                  <div
+                    aria-hidden
+                    className="flex gap-0.5 text-champagne"
+                  >
+                    {Array.from({ length: 5 }).map((_, star) => (
+                      <Star key={star} className="size-4 fill-current" />
+                    ))}
+                  </div>
+                  <blockquote className="mt-4 text-[17px] leading-relaxed text-ink">
+                    &ldquo;{review.quote}&rdquo;
+                  </blockquote>
+                </CardContent>
 
-              <blockquote className="mt-4 grow text-[17px] leading-relaxed text-ink">
-                “{review.quote}”
-              </blockquote>
-
-              <figcaption className="mt-6 flex items-center gap-3.5 border-t border-ink/5 pt-5">
-                <Avatar review={review} />
-                <span>
-                  <span className="block font-extrabold">{review.name}</span>
-                  <span className="block text-sm font-semibold text-ink-muted">
-                    {review.detail}
-                  </span>
-                </span>
-              </figcaption>
-            </figure>
+                <CardFooter className="p-6 pt-0">
+                  <figcaption className="flex w-full items-center gap-3.5 border-t border-border pt-5">
+                    <Avatar review={review} />
+                    <span>
+                      <span className="block font-bold">{review.name}</span>
+                      <span className="block text-sm font-semibold text-ink-muted">
+                        {review.detail}
+                      </span>
+                    </span>
+                  </figcaption>
+                </CardFooter>
+              </figure>
+            </Card>
           ))}
         </div>
       </div>

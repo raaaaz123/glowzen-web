@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
+import Compare from "@/components/Compare";
 import AppTour from "@/components/AppTour";
 import Areas from "@/components/Areas";
 import Reviews from "@/components/Reviews";
@@ -18,6 +19,7 @@ export default function Home() {
       <main>
         <Hero />
         <HowItWorks />
+        <Compare />
         <AppTour />
         <Areas />
         <Reviews />
