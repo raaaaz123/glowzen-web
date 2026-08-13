@@ -1,6 +1,7 @@
 import AppleIcon from "./AppleIcon";
+import InstallButton from "./InstallButton";
 import PhoneFrame from "./PhoneFrame";
-import { APP_STORE_URL, TAGLINE } from "@/lib/site";
+import { TAGLINE } from "@/lib/site";
 
 /* Benefit, not spec. "18 guided exercises" is a number we care about; "eight
    minutes, before your coffee goes cold" is a thing the reader can picture
@@ -50,13 +51,10 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href={APP_STORE_URL}
-              className="gradient-rose inline-flex items-center gap-2.5 rounded-full px-8 py-4 text-base font-bold text-white shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5"
-            >
+            <InstallButton className="gradient-rose inline-flex items-center gap-2.5 rounded-full px-8 py-4 text-base font-bold text-white shadow-[var(--shadow-lift)] transition-transform hover:-translate-y-0.5">
               <AppleIcon />
               Download app
-            </a>
+            </InstallButton>
             <a
               href="#how"
               className="rounded-full border border-ink/10 bg-white px-8 py-4 text-base font-bold text-ink transition-colors hover:border-rose/30"

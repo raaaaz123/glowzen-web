@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import AppleIcon from "./AppleIcon";
-import { APP_STORE_URL } from "@/lib/site";
+import InstallButton from "./InstallButton";
 
 const links = [
   { href: "/#how", label: "How it works" },
   { href: "/face-yoga", label: "By area" },
   { href: "/exercises", label: "Exercises" },
+  { href: "/tools", label: "Tools" },
   { href: "/compare", label: "Compare" },
   { href: "/guide", label: "Guide" },
   { href: "/#faq", label: "FAQ" },
@@ -31,7 +32,9 @@ export default function Nav() {
           <span className="text-lg font-extrabold tracking-tight">GlowZen</span>
         </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        {/* gap-6 rather than gap-8 since Tools made it seven links — the row
+            is the same overall width it was at six. */}
+        <ul className="hidden items-center gap-6 md:flex">
           {links.map((link) => (
             <li key={link.href}>
               <Link
@@ -47,13 +50,10 @@ export default function Nav() {
         {/* Straight to the listing, not to #get. The section it used to scroll
             to exists to sell the app; a visitor who has already decided should
             not have to read it again to find the button. */}
-        <a
-          href={APP_STORE_URL}
-          className="gradient-rose inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5"
-        >
+        <InstallButton className="gradient-rose inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5">
           <AppleIcon />
           Get the app
-        </a>
+        </InstallButton>
       </nav>
     </header>
   );
