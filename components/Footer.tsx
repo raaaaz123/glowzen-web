@@ -45,6 +45,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/tools" className="hover:text-rose-deep">
+                  Free tools
+                </Link>
+              </li>
+              <li>
                 <Link href="/compare" className="hover:text-rose-deep">
                   Compare
                 </Link>

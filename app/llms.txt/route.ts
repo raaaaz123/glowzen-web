@@ -2,6 +2,7 @@ import { faqs } from "@/lib/faqs";
 import { zones } from "@/lib/zones";
 import { exercisesForZone } from "@/lib/content/exercises";
 import { comparisons } from "@/lib/content/comparisons";
+import { tools } from "@/lib/content/tools";
 import { GUIDE_DESCRIPTION, GUIDE_TITLE } from "@/lib/guide";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/legal";
 import {
@@ -48,6 +49,18 @@ function body(): string {
     .map(
       (comparison) =>
         `  - [${comparison.title}](${SITE_URL}/compare/${comparison.slug})`,
+    )
+    .join("\n");
+
+  // The AI tool is marked inline rather than listed separately: an assistant
+  // summarising this file should not come away saying the whole set is
+  // on-device, which was true until the plan builder shipped.
+  const toolLinks = tools
+    .map(
+      (tool) =>
+        `  - [${tool.title}](${SITE_URL}/tools/${tool.slug}): ${tool.summary}${
+          tool.ai ? " (Sends the typed text to a language model; no photo, no account, no copy kept.)" : ""
+        }`,
     )
     .join("\n");
 
@@ -107,6 +120,8 @@ ${questions}
 - [All exercises](${SITE_URL}/exercises): every one of the ${EXERCISE_COUNT} movements, each with step-by-step technique, common mistakes and safety notes.
 - [Comparisons](${SITE_URL}/compare): how facial exercise compares with other approaches — mechanism, cost, risk and who each suits. Each page states the cases where the alternative is the better choice.
 ${comparisonLinks}
+- [Free tools](${SITE_URL}/tools): six free tools for the practice, none needing an account. Five run entirely client-side with no upload and no server involved; the sixth, the AI plan builder, sends a typed sentence to a language model to choose which areas to start with — no photograph is involved in any of them. Each page states plainly what its tool cannot tell you.
+${toolLinks}
 - [Privacy Policy](${SITE_URL}/privacy): what is collected, who receives it, and how to delete it.
 - [Terms of Use](${SITE_URL}/terms): what the app is and is not, results, responsibilities and liability.
 - [Support](${SITE_URL}/support): requirements, permissions, reminders, progress photos and deleting your data.

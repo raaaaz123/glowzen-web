@@ -4,6 +4,7 @@ import { LAST_UPDATED_ISO } from "@/lib/legal";
 import { zones } from "@/lib/zones";
 import { exercises } from "@/lib/content/exercises";
 import { comparisons } from "@/lib/content/comparisons";
+import { tools } from "@/lib/content/tools";
 
 /**
  * Still well under the 50,000-URL limit, so no need for generateSitemaps.
@@ -64,6 +65,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...comparisons.map((comparison) => ({
       url: `${SITE_URL}/compare/${comparison.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    {
+      url: `${SITE_URL}/tools`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    ...tools.map((tool) => ({
+      url: `${SITE_URL}/tools/${tool.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
