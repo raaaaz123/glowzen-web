@@ -36,6 +36,24 @@ export type Exercise = {
   muscles: string;
   hold: string;
   reps: string;
+  /**
+   * The machine-readable twin of `hold` and `reps`, in seconds.
+   *
+   * `hold` and `reps` are prose written for the page — "10 slow passes",
+   * "3 rounds each side", "5 swallows" — and nothing reliable can be parsed
+   * out of them. The routine builder and the timer read this instead.
+   *
+   * `work` is one round of working time, counting both sides where a movement
+   * has them, and is derived from the `steps` below rather than guessed: where
+   * a step gives a pace ("about three seconds per pass", "15 seconds each
+   * circuit"), the number here is that pace multiplied out. `rest` is the
+   * pause between rounds, which several entries name in their last step.
+   *
+   * Edit a step's timing and edit this in the same commit — a routine that
+   * budgets 30 seconds for a movement the page describes as a minute is the
+   * kind of drift the reader notices first.
+   */
+  timing: { work: number; rounds: number; rest: number };
   /** Numbered technique. Becomes HowTo schema, so each step is one action. */
   steps: string[];
   mistakes: string[];
@@ -57,6 +75,7 @@ export const exercises: Exercise[] = [
       "The frontalis — a broad, thin sheet running from your brow up to your hairline. It is the muscle doing the work every time you raise your eyebrows, and for many people it stays quietly switched on all day, especially at a screen.",
     hold: "30 seconds",
     reps: "3 rounds",
+    timing: { work: 30, rounds: 3, rest: 10 },
     steps: [
       "Wash your hands and face. You are about to press on skin for half a minute, and working oil into it is the one way this practice can go wrong.",
       "Place the pads of all four fingers of each hand flat across your forehead, fingers horizontal, so the pressure spreads evenly.",
@@ -89,6 +108,7 @@ export const exercises: Exercise[] = [
       "The lower frontalis where it meets the orbicularis oculi — the ring of muscle around the eye socket. Working against an upward press recruits the downward movers, which are the ones most people never consciously use.",
     hold: "20 seconds",
     reps: "3 rounds",
+    timing: { work: 20, rounds: 3, rest: 10 },
     steps: [
       "Rest your index fingers horizontally just underneath your eyebrows, sitting on the bone rather than on the eyelid.",
       "Press gently upward and slightly outward, so the brows lift a few millimetres.",
@@ -119,6 +139,7 @@ export const exercises: Exercise[] = [
       "The corrugator supercilii and procerus — the small muscles between and just above the brows that draw them together. They are the ones that fire when you concentrate, squint at a screen, or read something irritating.",
     hold: "10 slow passes",
     reps: "2 rounds",
+    timing: { work: 35, rounds: 2, rest: 10 },
     steps: [
       "Place your index and middle fingers of both hands together in the centre of your forehead, just above the space between your brows.",
       "Using light, flat pressure, sweep outward towards each temple in one slow pass — around three seconds per pass.",
@@ -151,6 +172,7 @@ export const exercises: Exercise[] = [
       "The orbicularis oculi, the ring of muscle encircling the eye. The skin over it is the thinnest on the body, which is exactly why this movement is tapping rather than pressing.",
     hold: "2 full circuits",
     reps: "2 rounds",
+    timing: { work: 30, rounds: 2, rest: 10 },
     steps: [
       "Use your ring fingers only. They are the weakest fingers, so they are the hardest to press too hard with — that is the entire reason for the convention.",
       "Start at the inner corner of each eye, on the bone beside the bridge of your nose.",
@@ -181,6 +203,7 @@ export const exercises: Exercise[] = [
       "The lower portion of the orbicularis oculi. It is a small band of muscle that most people have never contracted deliberately, which is why the movement feels strange before it feels like anything.",
     hold: "20 pulses",
     reps: "3 rounds",
+    timing: { work: 20, rounds: 3, rest: 10 },
     steps: [
       "Place an index finger at the outer corner of each eye, resting on the bone, with just enough contact to feel movement.",
       "Look straight ahead at a fixed point.",
@@ -211,6 +234,7 @@ export const exercises: Exercise[] = [
       "The temporalis, a fan-shaped muscle spreading above and in front of the ear. Clench your teeth with a hand on your temple and you will feel it move — that is how much of jaw tension lives here rather than in the jaw.",
     hold: "15 slow circles each direction",
     reps: "2 rounds",
+    timing: { work: 60, rounds: 2, rest: 10 },
     steps: [
       "Find your temples — the slight hollows between the outer corner of your eye and your hairline.",
       "Rest your middle and ring fingers there with light, flat pressure.",
@@ -243,6 +267,7 @@ export const exercises: Exercise[] = [
       "The zygomaticus major and minor, which run from the cheekbone to the corner of the mouth, plus the levator muscles beneath them. These are the muscles that lift when you smile genuinely.",
     hold: "20 seconds",
     reps: "3 rounds",
+    timing: { work: 40, rounds: 3, rest: 10 },
     steps: [
       "Open your mouth into an O shape and fold your upper lip in over your top teeth.",
       "Smile to lift your cheek muscles upward. You should feel the cheeks rise while the lip stays folded.",
@@ -274,6 +299,7 @@ export const exercises: Exercise[] = [
       "The buccinator, a flat muscle deep in the cheek that presses the cheek against the teeth. It is the muscle you use to whistle, to blow up a balloon, and to keep food from pooling in your cheek while chewing.",
     hold: "30 seconds of passing",
     reps: "3 rounds",
+    timing: { work: 30, rounds: 3, rest: 10 },
     steps: [
       "Close your lips and take a comfortable breath of air into your mouth. There is no need to fill it completely.",
       "Push all the air into your right cheek and hold for three seconds.",
@@ -305,6 +331,9 @@ export const exercises: Exercise[] = [
       "The zygomaticus and risorius pulling wide, against the orbicularis oris — the ring of muscle around the mouth — pulling closed and forward.",
     hold: "5 seconds each position",
     reps: "10 alternations",
+    // One "round" is one full alternation — five seconds wide, five pursed —
+    // so the rest here is only the deliberate change between positions.
+    timing: { work: 10, rounds: 10, rest: 2 },
     steps: [
       "Keep your lips together and smile as wide as you comfortably can, drawing the corners out towards your ears.",
       "Hold for five seconds. The lips stay closed throughout — this is not a teeth-showing smile.",
@@ -337,6 +366,7 @@ export const exercises: Exercise[] = [
       "The orbicularis oris. It has no bony attachment at either end, which makes it unusual, and it is the muscle doing the work whenever you close your lips, whistle, or drink through a straw.",
     hold: "15 seconds",
     reps: "3 rounds",
+    timing: { work: 15, rounds: 3, rest: 10 },
     steps: [
       "Press your lips together firmly, but without rolling them inward or clenching your teeth behind them.",
       "Place your index finger horizontally just below your lower lip, on the soft area above the chin.",
@@ -367,6 +397,7 @@ export const exercises: Exercise[] = [
       "The upper fibres of the orbicularis oris, running vertically above the lip. Repeated pursing — through a straw, a cigarette, or simple habit — keeps them short.",
     hold: "10 passes per side",
     reps: "2 rounds",
+    timing: { work: 45, rounds: 2, rest: 10 },
     steps: [
       "Apply a little facial oil or balm to the area first. This movement should glide, and dry skin will drag.",
       "Rest your index and middle fingers in the centre, just above your top lip.",
@@ -399,6 +430,8 @@ export const exercises: Exercise[] = [
       "The platysma across the front of the neck, plus the muscles that protrude the lower jaw. You should feel a distinct stretch along the underside of the jaw, not a squeeze at the joint.",
     hold: "10 seconds per side",
     reps: "3 rounds each side",
+    // Both sides inside one round, which is why `work` is double the hold.
+    timing: { work: 20, rounds: 3, rest: 10 },
     steps: [
       "Sit or stand with your shoulders down and back. Posture matters here more than in any other movement.",
       "Tilt your head back to about 45 degrees — partway, not all the way.",
@@ -430,6 +463,7 @@ export const exercises: Exercise[] = [
       "The suprahyoid group under the chin, plus the upper platysma. The stretch should be felt broadly across the front of the throat rather than sharply anywhere.",
     hold: "10 seconds",
     reps: "5 rounds",
+    timing: { work: 10, rounds: 5, rest: 5 },
     steps: [
       "Sit upright with your shoulders relaxed and down.",
       "Tilt your head back to roughly 45 degrees, keeping the movement in the neck rather than arching the upper back.",
@@ -460,6 +494,7 @@ export const exercises: Exercise[] = [
       "The buccinator drawing inward, worked against the zygomaticus trying to pull the mouth wide. Two opposing groups active at once, which is why 10 seconds is enough.",
     hold: "10 seconds",
     reps: "5 rounds",
+    timing: { work: 10, rounds: 5, rest: 5 },
     steps: [
       "Suck your cheeks inward so they press against your back teeth, and purse your lips.",
       "Hold that shape and now try to smile — the corners of your mouth pulling outward while the cheeks stay drawn in.",
@@ -492,6 +527,7 @@ export const exercises: Exercise[] = [
       "The suprahyoid and infrahyoid groups running between the jaw, the hyoid bone and the collarbone. These are swallowing muscles, which is why a swallow is built into the movement.",
     hold: "5 swallows",
     reps: "3 rounds",
+    timing: { work: 30, rounds: 3, rest: 10 },
     steps: [
       "Sit upright with shoulders down. Tilt your head back only slightly — around 20 degrees, far less than the jaw movements.",
       "Press the flat of your tongue firmly against the roof of your mouth and keep it there.",
@@ -522,6 +558,9 @@ export const exercises: Exercise[] = [
       "The platysma — a wide, thin sheet running from the jaw down over the collarbone. It is the muscle that shows as vertical cords when someone grimaces hard.",
     hold: "5 seconds",
     reps: "8 rounds",
+    // The five seconds of slack between rounds is part of the exercise, not
+    // padding — see the CTA below. Do not shorten it to fit a routine.
+    timing: { work: 5, rounds: 8, rest: 5 },
     steps: [
       "Sit or stand tall with your head in neutral. No tilt is needed for this one.",
       "Pull the corners of your mouth down and slightly back, as if making an exaggerated grimace.",
@@ -553,6 +592,7 @@ export const exercises: Exercise[] = [
       "The sternocleidomastoid running from behind the ear to the collarbone, and the upper trapezius across the top of the shoulders. Both take on tension from screens and phones.",
     hold: "6 slow half-circles",
     reps: "2 rounds",
+    timing: { work: 48, rounds: 2, rest: 10 },
     steps: [
       "Sit tall with your shoulders down and your arms relaxed.",
       "Tilt your right ear towards your right shoulder without lifting the shoulder to meet it.",
@@ -585,6 +625,7 @@ export const exercises: Exercise[] = [
       "The procerus between the brows and the nasalis across the bridge. Both fire when you squint, wrinkle your nose, or concentrate on something too small to read.",
     hold: "10 circles per position",
     reps: "2 rounds",
+    timing: { work: 60, rounds: 2, rest: 10 },
     steps: [
       "Pinch the bridge of your nose lightly between thumb and index finger, high up, near the inner corners of the eyes.",
       "Make 10 small, slow circles, moving the tissue rather than sliding over it.",
@@ -614,4 +655,16 @@ export function exerciseBySlug(slug: string): Exercise | undefined {
 /** The exercises belonging to one zone, in catalogue order. */
 export function exercisesForZone(zoneSlug: string): Exercise[] {
   return exercises.filter((exercise) => exercise.zoneSlug === zoneSlug);
+}
+
+/**
+ * How long one exercise takes, start to finish, in seconds.
+ *
+ * The rest after the final round is not counted: it belongs to whatever comes
+ * next, and charging it to the last exercise in a routine would overstate the
+ * total by ten seconds every time.
+ */
+export function exerciseSeconds(exercise: Exercise): number {
+  const { work, rounds, rest } = exercise.timing;
+  return rounds * work + (rounds - 1) * rest;
 }
