@@ -1,6 +1,5 @@
 import AppleIcon from "./AppleIcon";
-import InstallButton from "./InstallButton";
-import { MIN_OS } from "@/lib/site";
+import { APP_STORE_URL, MIN_OS } from "@/lib/site";
 
 /**
  * The install prompt used across the content pages.
@@ -41,10 +40,13 @@ export default function AppCta({
             {headline}
           </h2>
           <p className="mt-4 max-w-xl leading-relaxed text-white/90">{body}</p>
-          <InstallButton className="mt-7 inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-[15px] font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5">
+          <a
+            href={APP_STORE_URL}
+            className="mt-7 inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-[15px] font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5"
+          >
             <AppleIcon />
             Download GlowZen
-          </InstallButton>
+          </a>
           <p className="mt-4 text-sm font-semibold text-white/70">
             iPhone · {MIN_OS} or later · Free to start
           </p>
@@ -59,10 +61,13 @@ export default function AppCta({
         {headline}
       </h2>
       <p className="mt-2 leading-relaxed text-ink-soft">{body}</p>
-      <InstallButton className="gradient-rose mt-5 inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[15px] font-bold text-white transition-transform hover:-translate-y-0.5">
+      <a
+        href={APP_STORE_URL}
+        className="gradient-rose mt-5 inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[15px] font-bold text-white transition-transform hover:-translate-y-0.5"
+      >
         <AppleIcon />
         Get GlowZen for iPhone
-      </InstallButton>
+      </a>
       <p className="mt-3 text-xs font-bold text-ink-muted">
         {MIN_OS} or later · Free to start · No account needed
       </p>

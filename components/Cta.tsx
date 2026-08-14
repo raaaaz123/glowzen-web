@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import AppleIcon from "./AppleIcon";
-import InstallButton from "./InstallButton";
 import { CONTACT_EMAIL, REPLY_WINDOW } from "@/lib/legal";
+import { APP_STORE_URL } from "@/lib/site";
 
 export default function Cta() {
   return (
@@ -32,10 +32,13 @@ export default function Cta() {
           </p>
 
           <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <InstallButton className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-base font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5">
+            <a
+              href={APP_STORE_URL}
+              className="inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-base font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5"
+            >
               <AppleIcon />
               Download on the App Store
-            </InstallButton>
+            </a>
           </div>
 
           <p className="mt-6 text-sm font-semibold text-white/75">

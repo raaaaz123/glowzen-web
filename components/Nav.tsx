@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AppleIcon from "./AppleIcon";
-import InstallButton from "./InstallButton";
+import { APP_STORE_URL } from "@/lib/site";
 
 const links = [
   { href: "/#how", label: "How it works" },
@@ -50,10 +50,13 @@ export default function Nav() {
         {/* Straight to the listing, not to #get. The section it used to scroll
             to exists to sell the app; a visitor who has already decided should
             not have to read it again to find the button. */}
-        <InstallButton className="gradient-rose inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5">
+        <a
+          href={APP_STORE_URL}
+          className="gradient-rose inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(125,83,221,0.6)] transition-transform hover:-translate-y-0.5"
+        >
           <AppleIcon />
           Get the app
-        </InstallButton>
+        </a>
       </nav>
     </header>
   );
