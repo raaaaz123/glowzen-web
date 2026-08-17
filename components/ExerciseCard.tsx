@@ -13,7 +13,7 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
   return (
     <Link
       href={`/exercises/${exercise.slug}`}
-      className="group flex h-full flex-col rounded-2xl border border-ink/8 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-rose/30 hover:shadow-[var(--shadow-card)]"
+      className="group flex h-full flex-col rounded-2xl border border-ink/8 bg-surface p-5 transition-all hover:-translate-y-0.5 hover:border-rose/30 hover:shadow-[var(--shadow-card)]"
     >
       <h3 className="font-bold text-[17px] leading-snug text-ink group-hover:text-rose-deep">
         {exercise.name}

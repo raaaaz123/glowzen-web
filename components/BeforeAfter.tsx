@@ -49,7 +49,7 @@ export default function BeforeAfter({
         }}
         onPointerUp={() => setDragging(false)}
         onPointerCancel={() => setDragging(false)}
-        className="relative aspect-3/4 w-full cursor-ew-resize touch-none overflow-hidden rounded-[var(--radius-hero)] border border-white/70 shadow-[var(--shadow-lift)] select-none"
+        className="relative aspect-3/4 w-full cursor-ew-resize touch-none overflow-hidden rounded-[var(--radius-hero)] border border-white/10 shadow-[var(--shadow-lift)] select-none"
       >
         {/* After sits underneath; the before layer clips away to reveal it. */}
         <Image
@@ -75,7 +75,10 @@ export default function BeforeAfter({
           />
         </div>
 
-        <span className="pointer-events-none absolute top-4 left-4 rounded-full bg-ink/55 px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase backdrop-blur-sm">
+        {/* Sits on a photograph, not on the page, so the scrim is literal black
+            rather than `ink` — `ink` is near-white in this palette and would
+            put white text on a white pill. */}
+        <span className="pointer-events-none absolute top-4 left-4 rounded-full bg-black/55 px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase backdrop-blur-sm">
           Before
         </span>
         <span className="pointer-events-none absolute top-4 right-4 rounded-full bg-rose-deep/85 px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase backdrop-blur-sm">
@@ -84,10 +87,10 @@ export default function BeforeAfter({
 
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 w-0.5 bg-white/90 shadow-[0_0_14px_rgba(0,0,0,0.3)]"
+          className="pointer-events-none absolute inset-y-0 w-0.5 bg-white/90 shadow-[0_0_14px_rgba(0,0,0,0.6)]"
           style={{ left: `${position}%` }}
         >
-          <span className="absolute top-1/2 left-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-rose-deep shadow-lg ring-1 ring-black/5">
+          <span className="absolute top-1/2 left-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-surface text-rose-deep shadow-lg ring-1 ring-white/15">
             <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
               <path
                 d="M8 5 4 10l4 5M12 5l4 5-4 5"

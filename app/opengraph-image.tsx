@@ -9,6 +9,11 @@ import { SITE_NAME, TAGLINE } from "@/lib/site";
  * Generated rather than shipped as a PNG so it stays in step with the name
  * and tagline. Satori supports flexbox only — no grid, no shorthand colour
  * functions — so the styles here are more literal than the site's Tailwind.
+ *
+ * The hexes are the dark palette from globals.css, hand-copied because Satori
+ * cannot read CSS variables. They have to be kept in step by hand: a share
+ * card still on the old white background is the first thing anyone sees of the
+ * site, and it would be the one surface that never got the redesign.
  */
 
 export const alt = `${SITE_NAME} — ${TAGLINE}`;
@@ -29,7 +34,7 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "88px",
-          backgroundImage: "linear-gradient(135deg, #ffffff, #fcfbfe)",
+          backgroundImage: "linear-gradient(135deg, #0b0918, #07060d)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
@@ -41,7 +46,7 @@ export default async function Image() {
             alt=""
             style={{ borderRadius: "26px" }}
           />
-          <span style={{ fontSize: 54, fontWeight: 800, color: "#1b1b2e" }}>
+          <span style={{ fontSize: 54, fontWeight: 800, color: "#f4f2ff" }}>
             {SITE_NAME}
           </span>
         </div>
@@ -56,7 +61,7 @@ export default async function Image() {
             marginTop: "44px",
             fontSize: 80,
             fontWeight: 700,
-            color: "#1b1b2e",
+            color: "#f4f2ff",
           }}
         >
           <div style={{ display: "flex" }}>Sculpt, lift &amp; glow</div>
@@ -68,7 +73,7 @@ export default async function Image() {
             display: "flex",
             marginTop: "36px",
             fontSize: 36,
-            color: "#5c5a70",
+            color: "#a9a3c4",
           }}
         >
           Eight minutes a day. No equipment, no procedures.
@@ -82,8 +87,8 @@ export default async function Image() {
                 display: "flex",
                 padding: "16px 32px",
                 borderRadius: "999px",
-                backgroundColor: "#ffffff",
-                color: "#7d53dd",
+                backgroundColor: "#1c1830",
+                color: "#b9a0ff",
                 fontSize: 30,
                 fontWeight: 700,
               }}

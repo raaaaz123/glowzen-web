@@ -29,11 +29,22 @@ const promises = [
   },
 ];
 
-export default function Privacy() {
+/**
+ * The plain-language privacy panel.
+ *
+ * `showPolicyLink` exists because this component now renders on /privacy
+ * itself, above the formal policy — where a "Read the full privacy policy"
+ * button would link the page to itself.
+ */
+export default function Privacy({
+  showPolicyLink = true,
+}: {
+  showPolicyLink?: boolean;
+}) {
   return (
     <section className="px-5 py-14 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-[var(--radius-hero)] border border-border bg-white/70 p-6 backdrop-blur-sm sm:p-12">
+        <div className="rounded-[var(--radius-hero)] border border-border bg-surface/70 p-6 backdrop-blur-sm sm:p-12">
           <SectionHeading
             eyebrow="Your face, your data"
             title="Built to know as little about you as possible"
@@ -42,7 +53,7 @@ export default function Privacy() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {promises.map((promise) => (
-              <Card key={promise.title} className="bg-white">
+              <Card key={promise.title} className="bg-surface">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2.5 text-[17px]">
                     <span
@@ -61,12 +72,14 @@ export default function Privacy() {
             ))}
           </div>
 
-          <Button asChild variant="link" className="mt-8 px-0">
-            <Link href="/privacy">
-              Read the full privacy policy
-              <ArrowUpRight aria-hidden className="size-4" />
-            </Link>
-          </Button>
+          {showPolicyLink && (
+            <Button asChild variant="link" className="mt-8 px-0">
+              <Link href="/privacy">
+                Read the full privacy policy
+                <ArrowUpRight aria-hidden className="size-4" />
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </section>

@@ -31,10 +31,6 @@ export default function AppCta({
   if (variant === "panel") {
     return (
       <aside className="gradient-rose relative mt-16 overflow-hidden rounded-[var(--radius-hero)] px-7 py-10 shadow-[var(--shadow-lift)] sm:px-12 sm:py-14">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-white/15 blur-2xl"
-        />
         <div className="relative">
           <h2 className="font-display text-2xl font-bold text-balance text-white sm:text-[1.75rem]">
             {headline}
@@ -42,12 +38,12 @@ export default function AppCta({
           <p className="mt-4 max-w-xl leading-relaxed text-white/90">{body}</p>
           <a
             href={APP_STORE_URL}
-            className="mt-7 inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-[15px] font-extrabold text-rose-deep transition-transform hover:-translate-y-0.5"
+            className="mt-7 inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-[15px] font-extrabold text-rose-ink transition-transform hover:-translate-y-0.5"
           >
             <AppleIcon />
             Download GlowZen
           </a>
-          <p className="mt-4 text-sm font-semibold text-white/70">
+          <p className="mt-4 text-sm font-semibold text-white/85">
             iPhone · {MIN_OS} or later · Free to start
           </p>
         </div>

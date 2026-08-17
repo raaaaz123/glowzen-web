@@ -90,7 +90,7 @@ export default function PhotoComparer() {
             </div>
           ) : (
             <div className="mt-4">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-ink/10 bg-ink/4">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-ink/10 bg-white/5">
                 <img
                   src={before.url}
                   alt="Your earlier photo"
@@ -108,13 +108,13 @@ export default function PhotoComparer() {
                 </div>
                 <div
                   aria-hidden
-                  className="absolute inset-y-0 w-0.5 bg-white shadow-[0_0_0_1px_rgba(27,27,46,0.25)]"
+                  className="absolute inset-y-0 w-0.5 bg-surface shadow-[0_0_0_1px_rgba(27,27,46,0.25)]"
                   style={{ left: `${position}%` }}
                 />
-                <span className="absolute top-3 left-3 rounded-full bg-ink/70 px-2.5 py-1 text-[11px] font-bold text-white">
+                <span className="absolute top-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-bold text-white">
                   Earlier
                 </span>
-                <span className="absolute top-3 right-3 rounded-full bg-ink/70 px-2.5 py-1 text-[11px] font-bold text-white">
+                <span className="absolute top-3 right-3 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-bold text-white">
                   Recent
                 </span>
               </div>
@@ -215,7 +215,7 @@ function Picker({
 function Framed({ src, caption }: { src: string; caption: string }) {
   return (
     <figure>
-      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-ink/10 bg-ink/4">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-ink/10 bg-white/5">
         <img
           src={src}
           alt={`Your ${caption.toLowerCase()} photo`}

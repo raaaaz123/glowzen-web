@@ -10,7 +10,7 @@ import { CONTACT_EMAIL, REPLY_WINDOW } from "@/lib/legal";
  */
 export default function SupportContact() {
   return (
-    <div className="mt-10 rounded-[var(--radius-hero)] border border-ink/5 bg-white/70 p-7 backdrop-blur-sm sm:p-9">
+    <div className="mt-10 rounded-[var(--radius-hero)] border border-ink/5 bg-surface/70 p-7 backdrop-blur-sm sm:p-9">
       <p className="text-xs font-extrabold tracking-[0.18em] text-rose-deep uppercase">
         Email support
       </p>

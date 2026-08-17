@@ -120,7 +120,7 @@ export default function RoutineBuilder({
                     className={`inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-[15px] font-bold transition-colors ${
                       on
                         ? "border-rose bg-blush/50 text-rose-deep"
-                        : "border-ink/10 bg-white hover:border-rose/30"
+                        : "border-ink/10 bg-surface hover:border-rose/30"
                     }`}
                   >
                     <input
@@ -157,7 +157,7 @@ export default function RoutineBuilder({
                     className={`inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-[15px] font-bold transition-colors ${
                       on
                         ? "border-rose bg-blush/50 text-rose-deep"
-                        : "border-ink/10 bg-white hover:border-rose/30"
+                        : "border-ink/10 bg-surface hover:border-rose/30"
                     }`}
                   >
                     <input
@@ -181,7 +181,7 @@ export default function RoutineBuilder({
 
       <div aria-live="polite">
         {selected.length === 0 ? (
-          <p className="mt-5 rounded-2xl border border-ink/10 bg-white px-5 py-6 text-center leading-relaxed text-ink-soft">
+          <p className="mt-5 rounded-2xl border border-ink/10 bg-surface px-5 py-6 text-center leading-relaxed text-ink-soft">
             Pick at least one area above. Two or three is a sensible session;
             all seven is a long evening.
           </p>
@@ -204,7 +204,7 @@ export default function RoutineBuilder({
                 <li key={exercise.slug}>
                   <Link
                     href={`/exercises/${exercise.slug}`}
-                    className="group flex items-start gap-4 rounded-2xl border border-ink/10 bg-white px-4 py-4 transition-colors hover:border-rose/30"
+                    className="group flex items-start gap-4 rounded-2xl border border-ink/10 bg-surface px-4 py-4 transition-colors hover:border-rose/30"
                   >
                     <span
                       aria-hidden

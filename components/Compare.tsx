@@ -28,10 +28,6 @@ export default function Compare() {
           />
 
           <div className="relative mx-auto w-full max-w-sm">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-6 rounded-[3rem] bg-rose/20 blur-3xl"
-            />
             <div className="relative">
               <BeforeAfter />
               <p className="mt-4 text-center text-sm font-bold text-ink-soft">
@@ -41,7 +37,7 @@ export default function Compare() {
                 {stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-2xl bg-white p-3 shadow-[var(--shadow-card)]"
+                    className="rounded-2xl bg-surface p-3 shadow-[var(--shadow-card)]"
                   >
                     <p className="text-xl font-extrabold text-rose-deep">
                       {stat.value}

@@ -1,61 +1,94 @@
 @import "tailwindcss";
 
-/* GlowZen — "Violet".
-   These tokens mirror GlowFace/Utilities/Theme.swift so the site and the app
-   read as one brand. Only change a value here if it changes there too.
+/* GlowZen — "Violet", dark.
 
-   The app moved its shipping palette from `.roseQuartz` to `.violet`
-   (`GFTheme.fallback`) to agree with the app icon, and this file had been left
-   on rose — a violet icon opening a violet app, linked from a pink website.
+   The site is dark-only. There is no light palette and no toggle: every token
+   below is a dark value, so a component written against these names cannot
+   render a light surface by accident.
 
-   ## Why the names still say "rose"
+   ## Why the names still say "rose" / "cream" / "ink"
 
    They are literal-name aliases for palette *roles*, not claims about hue, and
-   the app does exactly the same thing: `GFColors.pink` returns the accent, so
-   under `.blueLight` "pink" is blue. Renaming `--color-rose` to
-   `--color-violet` would touch ~200 call sites across every page and component
-   for no rendered difference, and would have to be redone the next time the
-   palette moves. Read `rose` as "the accent", `orchid` as "the alternate
-   accent", and `cream` as "the page".
+   the app does the same thing: `GFColors.pink` returns the accent, so under
+   `.blueLight` "pink" is blue. Renaming `--color-rose` to `--color-violet`
+   would touch ~200 call sites across every page and component for no rendered
+   difference, and would have to be redone the next time the palette moves.
 
-   Role mapping, for the next person diffing the two files:
-     rose        -> accent          orchid  -> accentAlt
-     rose-light  -> accent +10% white   (GFGradients.primary's first stop)
-     rose-deep   -> accent -10% black   (GFGradients.primary's second stop)
-     cream       -> bgPrimary        cream-deep -> bgSecondary
-     ink/-soft/-muted -> textPrimary/Secondary/Tertiary
-     coral -> accentWarm             mint -> accentCool */
+   Read the names as roles:
+     rose        -> accent              orchid     -> alternate accent
+     rose-light  -> gradient stop 1     rose-deep  -> accent *text* on dark
+     cream       -> the page            cream-deep -> secondary page
+     surface     -> a raised card       surface-2  -> a card on a card
+     ink/-soft/-muted -> text primary/secondary/tertiary
+     blush       -> violet tint (selected states, glows)
+     coral -> accentWarm                mint -> accentCool
+
+   ## The one inversion worth knowing about
+
+   `rose-deep` used to be "accent -10% black" — a darker violet, for accent text
+   on a white page. On black it has to go the other way, so it is now the
+   *lightest* violet in the set. All 68 `text-rose-deep` call sites keep working
+   and keep meaning "accent-coloured text"; only the value moved. The gradient
+   utility no longer uses it, precisely so the gradient does not invert. */
 @theme {
-  --color-blush: #e4dbfb;
+  /* A mid violet, read as a tint at 25–50% over the page. It backs the selected
+     state in the quiz, the routine builder and the timer. It used to double as
+     the hero's background glow; those glows are gone and this is now only ever
+     a tint, which is why it could be lightened without washing anything out. */
+  --color-blush: #6350a8;
   /* Unchanged on purpose: champagne is the one colour that stays gold in every
-     palette, because the premium marks need a warm metal to read against. */
+     palette, because the premium marks need a warm metal to read against. It
+     is used at 8% as a fill and 45% as a hairline, both of which sit well on
+     black without adjustment. */
   --color-champagne: #e4b57e;
-  --color-pearl: #f8f5ff;
+  --color-pearl: #12101c;
 
-  --color-cream: #ffffff;
-  --color-cream-deep: #fcfbfe;
+  --color-cream: #07060d;
+  --color-cream-deep: #0b0918;
 
-  --color-ink: #1b1b2e;
-  --color-ink-soft: #5c5a70;
-  --color-ink-muted: #9e9cb0;
+  /* The raised surfaces. `surface` is what `bg-white` used to mean — roughly
+     white at 5% over the page, resolved to an opaque hex so it composites the
+     same whether or not something is stacked behind it. */
+  --color-surface: #14111f;
+  --color-surface-2: #1c1830;
 
-  --color-rose: #8b5cf6;
-  --color-rose-light: #976cf7;
-  --color-rose-deep: #7d53dd;
-  --color-orchid: #6366f1;
+  --color-ink: #f4f2ff;
+  --color-ink-soft: #a9a3c4;
+  --color-ink-muted: #726c8c;
+
+  /* Lightened across the board — the previous set read heavy and over-saturated
+     against black. Everything here moved up in lightness by roughly one step;
+     the constraint on how far is white text, which several of these sit under.
+     Measured ratios are in the comments so the next change can keep them. */
+  --color-rose: #9575f7;
+  --color-rose-light: #bda9fc;
+  /* Lightest of the three — see "the one inversion" above. 11.5:1 on the page. */
+  --color-rose-deep: #cbbaff;
+  /* The deep end of the violet, for the two places that need one:
+     - accent text on a *light* field (the white download pill on the CTA
+       panel), where `rose-deep` would render lilac-on-white at about 2:1;
+     - a solid violet fill sitting under white text (the active tab pill),
+       where `rose` itself only reaches 3.4:1 now that it has been lightened.
+     7.1:1 against white either way. */
+  --color-rose-ink: #6d28d9;
+  --color-orchid: #9aa3fa;
   --color-coral: #ff8a6b;
-  --color-mint: #2fbfae;
+  /* Nudged up from #2FBFAE: the light-page mint went muddy against black. */
+  --color-mint: #3ad4c0;
 
-  /* The ordinary system UI stack, so the site renders in whatever the reader's
-     OS already uses — San Francisco on Apple, Segoe on Windows, Roboto on
-     Android. Nothing is downloaded, so there is no font swap on first paint.
+  /* Geist, self-hosted through `next/font/google` in app/layout.tsx, which
+     inlines and preloads it — no request to Google, no layout shift. The stack
+     falls back to system UI so the page still renders if the font fails.
 
-     Headings share the stack with body text and separate themselves by size
-     and weight alone. `--font-display` is kept as a token because ~14 headings
-     reference `.font-display`; it is no longer a different family. */
+     This replaces the previous system-font-only stack. Geist is doing real
+     work here rather than decorating: the display sizes below run at -0.05em,
+     and the system faces smear at that tracking where a geometric grotesque
+     stays crisp. `--font-display` remains a separate token because ~14
+     headings reference `.font-display`; it is the same family, differing only
+     in the tracking applied by the class. */
   --font-sans:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
+    var(--font-geist), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-sans);
 
   --radius-card: 26px;
@@ -72,25 +105,28 @@
      shadcn install does: `rounded-lg` is already used across the existing
      pages, and silently changing what it means would restyle the whole site
      as a side effect of adding a button. */
-  --color-background: #ffffff;
-  --color-foreground: #1b1b2e;
-  --color-card: #ffffff;
-  --color-card-foreground: #1b1b2e;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #1b1b2e;
-  --color-primary: #8b5cf6;
+  --color-background: #07060d;
+  --color-foreground: #f4f2ff;
+  --color-card: #14111f;
+  --color-card-foreground: #f4f2ff;
+  --color-popover: #14111f;
+  --color-popover-foreground: #f4f2ff;
+  --color-primary: #9575f7;
   --color-primary-foreground: #ffffff;
-  --color-secondary: #f8f5ff;
-  --color-secondary-foreground: #1b1b2e;
-  --color-muted: #f8f5ff;
-  --color-muted-foreground: #5c5a70;
-  --color-accent: #e4dbfb;
-  --color-accent-foreground: #1b1b2e;
-  --color-destructive: #d64550;
-  --color-destructive-foreground: #ffffff;
-  --color-border: rgb(27 27 46 / 0.1);
-  --color-input: rgb(27 27 46 / 0.12);
-  --color-ring: #7d53dd;
+  --color-secondary: #1c1830;
+  --color-secondary-foreground: #f4f2ff;
+  --color-muted: #14111f;
+  --color-muted-foreground: #a9a3c4;
+  --color-accent: #1c1830;
+  --color-accent-foreground: #f4f2ff;
+  --color-destructive: #ff6b74;
+  --color-destructive-foreground: #07060d;
+  /* Borders carry the weight that shadows used to. On a white page a card was
+     separated by its drop shadow; on black a shadow is invisible, so the
+     hairline is what makes an edge. Hence 10% rather than the old 6%. */
+  --color-border: rgb(255 255 255 / 0.1);
+  --color-input: rgb(255 255 255 / 0.14);
+  --color-ring: #cbbaff;
 
   /* Radix Accordion measures its own content and exposes the height as a CSS
      variable; these are the two animations that consume it. Declared here
@@ -99,31 +135,31 @@
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
-  /* Violet's `cardShadow` is #6D5BA8 at 0.16 — a touch heavier than rose's,
-     because the page behind it is now white and the shadow is the only thing
-     lifting a card off it. */
-  --shadow-card: 0 12px 22px -8px rgb(109 91 168 / 0.16), 0 2px 5px rgb(0 0 0 / 0.04);
-  --shadow-lift: 0 20px 40px -12px rgb(109 91 168 / 0.3);
+  /* Black, not violet: a card's shadow is depth, and tinting it just greys the
+     page around the card. `shadow-lift` keeps the violet because it is only
+     ever applied to accent-coloured elements — the download button, the CTA
+     panel — where it reads as the element glowing rather than casting. */
+  --shadow-card: 0 12px 22px -8px rgb(0 0 0 / 0.55), 0 2px 5px rgb(0 0 0 / 0.4);
+  --shadow-lift: 0 20px 45px -12px rgb(139 92 246 / 0.45);
 }
 
 html {
   scroll-behavior: smooth;
+  /* Native form controls, scrollbars and the like read the colour scheme from
+     here. Without it the browser paints light scrollbars and light selects on
+     a black page. */
+  color-scheme: dark;
 }
 
-/* Rose ran these washes at 0.55 and 0.9, which is what produced the warm cream
-   page. Violet sets `glowStrength: 0` — in the app the tinted background
-   circles are switched off entirely and the page is plain white.
+/* Flat. Two faint violet radial washes used to sit here, lifting the corners
+   of the page, and a top-to-bottom gradient under them. They are gone: the
+   reference this design follows is flat #000, and with the hero's own glows
+   removed as well the washes were the only thing left tinting the page purple.
 
-   Matching that literally would leave a marketing page dead flat, so the washes
-   are kept at roughly a third of their old strength: enough to keep some light
-   in the corners, faint enough that the page still reads as white rather than
-   as lilac. Delete these two lines for exact parity with the app. */
+   The brand now lives entirely in the accents — the headline, the buttons, the
+   CTA panel — against a background that stays out of their way. */
 body {
-  background:
-    radial-gradient(60rem 40rem at 85% -10%, rgb(228 219 251 / 0.30), transparent 60%),
-    radial-gradient(50rem 35rem at 5% 5%, rgb(248 245 255 / 0.70), transparent 55%),
-    linear-gradient(to bottom, var(--color-cream), var(--color-cream-deep));
-  background-attachment: fixed;
+  background-color: var(--color-cream);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
@@ -142,31 +178,49 @@ body {
   }
 }
 
+/* Not `rose-light` -> `rose-deep` any more: `rose-deep` is the lightest violet
+   now, so the old pair would run the gradient backwards.
+
+   Both stops are lighter than they were (#7C3AED -> #5B21B6), which is the
+   palette-wide lightening, but they stay deeper than `rose` itself and that
+   part is a contrast fix rather than a taste one. This gradient fills the whole
+   CTA panel and the copy on it is white, so the stops set a floor: white on
+   `rose-light` would be about 2:1 and fails at any size.
+
+   The panel's text is centre-aligned, so the midpoint of the gradient is what
+   most of it actually sits on — that lands at 5.2:1. The top-left corner is
+   lighter (4.2:1) but carries the icon, not text. */
 @utility gradient-rose {
-  background-image: linear-gradient(135deg, var(--color-rose-light), var(--color-rose-deep));
+  background-image: linear-gradient(135deg, #8b5cf6, #6d3ad6);
 }
 
 @utility text-gradient-rose {
-  background-image: linear-gradient(135deg, var(--color-rose-light), var(--color-rose-deep));
+  background-image: linear-gradient(135deg, #dccfff, var(--color-rose));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 @utility card-surface {
-  background-color: #fff;
-  /* Hairline derived from the new ink (#1B1B2E), not the old plum-black. */
-  border: 1px solid rgb(27 27 46 / 0.06);
+  background-color: var(--color-surface);
+  border: 1px solid rgb(255 255 255 / 0.08);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
 }
 
-/* Visible keyboard focus everywhere, since the brand accent on a near-white
-   page is low contrast for a default outline. */
+/* Visible keyboard focus everywhere. Uses `rose-deep` — the light violet —
+   because the old `rose-deep` was chosen to be dark enough for a white page
+   and would now be the low-contrast choice. */
 :focus-visible {
   outline: 3px solid var(--color-rose-deep);
   outline-offset: 3px;
   border-radius: 6px;
+}
+
+/* Text selection defaults to a light-mode blue that is unreadable here. */
+::selection {
+  background-color: rgb(139 92 246 / 0.4);
+  color: var(--color-ink);
 }
 
 @keyframes accordion-down {
@@ -197,14 +251,13 @@ body {
   }
 }
 
-/* Fraunces' SOFT/WONK variation axes are gone with the font. What remains is
-   the tracking large sans headings need: the system stack sets word spacing for
-   body copy, and at 2rem and up that reads loose and slightly untidy. The
-   optical-sizing hint keeps the heavier weights from smearing at large sizes on
-   the variable system faces that support it. */
+/* The tracking large headings need. Tightened from -0.025em to -0.05em to match
+   the reference's display type, which is the single most recognisable thing
+   about it — at 60px it runs -3px. Geist is built for this; the previous system
+   stack was not, which is why the font moved at the same time. */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.05em;
   font-optical-sizing: auto;
   text-wrap: balance;
 }

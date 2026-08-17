@@ -36,7 +36,7 @@ export default function Areas() {
                       {zone.zone}
                     </Link>
                   </h3>
-                  <Badge variant="outline" className="bg-white/70">
+                  <Badge variant="outline" className="bg-surface/70">
                     {zoneExercises.length}
                   </Badge>
                 </div>

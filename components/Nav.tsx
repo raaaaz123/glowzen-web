@@ -3,19 +3,22 @@ import Link from "next/link";
 import AppleIcon from "./AppleIcon";
 import { APP_STORE_URL } from "@/lib/site";
 
-const links = [
-  { href: "/#how", label: "How it works" },
-  { href: "/face-yoga", label: "By area" },
-  { href: "/exercises", label: "Exercises" },
-  { href: "/tools", label: "Tools" },
-  { href: "/compare", label: "Compare" },
-  { href: "/guide", label: "Guide" },
-  { href: "/#faq", label: "FAQ" },
-];
-
+/**
+ * Wordmark and one button — the reference's whole navigation.
+ *
+ * The seven section links (How it works, By area, Exercises, Tools, Compare,
+ * Guide, FAQ) used to sit between them and are deliberately gone. Every one of
+ * them is still linked from the Footer, so nothing became unreachable and the
+ * internal linking a crawler follows is intact; what changed is that the top of
+ * the page now asks for one thing instead of eight.
+ *
+ * Not sticky, also deliberately. A bar pinned over a hero that is meant to own
+ * the screen spends 60px of every viewport restating a button the hero already
+ * has, so the header scrolls away with the rest of the page.
+ */
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/5 bg-cream/80 backdrop-blur-xl">
+    <header className="border-b border-white/5">
       <nav
         aria-label="Main"
         className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8"
@@ -31,21 +34,6 @@ export default function Nav() {
           />
           <span className="text-lg font-extrabold tracking-tight">GlowZen</span>
         </Link>
-
-        {/* gap-6 rather than gap-8 since Tools made it seven links — the row
-            is the same overall width it was at six. */}
-        <ul className="hidden items-center gap-6 md:flex">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-[15px] font-semibold text-ink-soft transition-colors hover:text-rose-deep"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
 
         {/* Straight to the listing, not to #get. The section it used to scroll
             to exists to sell the app; a visitor who has already decided should

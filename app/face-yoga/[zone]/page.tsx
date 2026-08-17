@@ -202,7 +202,7 @@ export default async function Page({
                     <li key={other.slug}>
                       <Link
                         href={`/face-yoga/${other.slug}`}
-                        className="inline-block rounded-full border border-ink/10 bg-white px-4 py-2 text-[15px] font-bold transition-colors hover:border-rose/30 hover:text-rose-deep"
+                        className="inline-block rounded-full border border-ink/10 bg-surface px-4 py-2 text-[15px] font-bold transition-colors hover:border-rose/30 hover:text-rose-deep"
                       >
                         {other.zone}
                       </Link>

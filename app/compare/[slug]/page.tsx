@@ -263,7 +263,7 @@ export default async function Page({
                   <li key={other.slug}>
                     <Link
                       href={`/compare/${other.slug}`}
-                      className="inline-block rounded-full border border-border bg-white px-4 py-2 text-[15px] font-bold capitalize transition-colors hover:border-rose/30 hover:text-rose-deep"
+                      className="inline-block rounded-full border border-border bg-surface px-4 py-2 text-[15px] font-bold capitalize transition-colors hover:border-rose/30 hover:text-rose-deep"
                     >
                       vs {other.alternative}
                     </Link>

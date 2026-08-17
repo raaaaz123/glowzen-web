@@ -112,7 +112,7 @@ export default function AiPlanBuilder() {
               rows={4}
               maxLength={MAX_CHARS}
               placeholder="A sentence or two: the areas you care about, how long you have, and anything a routine should be careful around."
-              className="mt-2.5 w-full resize-y rounded-xl border border-ink/12 bg-white px-4 py-3 leading-relaxed"
+              className="mt-2.5 w-full resize-y rounded-xl border border-ink/12 bg-surface px-4 py-3 leading-relaxed"
             />
 
             <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
@@ -146,7 +146,7 @@ export default function AiPlanBuilder() {
                     <button
                       type="button"
                       onClick={() => setGoals(example)}
-                      className="w-full rounded-xl border border-ink/10 bg-white px-3.5 py-2.5 text-left text-[15px] leading-snug text-ink-soft transition-colors hover:border-rose/30 hover:text-rose-deep"
+                      className="w-full rounded-xl border border-ink/10 bg-surface px-3.5 py-2.5 text-left text-[15px] leading-snug text-ink-soft transition-colors hover:border-rose/30 hover:text-rose-deep"
                     >
                       {example}
                     </button>
@@ -216,7 +216,7 @@ export default function AiPlanBuilder() {
                 <li key={exercise.slug}>
                   <Link
                     href={`/exercises/${exercise.slug}`}
-                    className="group flex items-start gap-4 rounded-2xl border border-ink/10 bg-white px-4 py-4 transition-colors hover:border-rose/30"
+                    className="group flex items-start gap-4 rounded-2xl border border-ink/10 bg-surface px-4 py-4 transition-colors hover:border-rose/30"
                   >
                     <span
                       aria-hidden

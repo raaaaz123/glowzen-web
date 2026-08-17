@@ -121,10 +121,10 @@ export default function StreakTracker() {
                             title={day.label}
                             className={`size-6 rounded-[7px] border transition-colors sm:size-7 ${
                               day.future
-                                ? "cursor-default border-transparent bg-ink/4"
+                                ? "cursor-default border-transparent bg-white/5"
                                 : marked
                                   ? "gradient-rose border-transparent"
-                                  : "border-ink/10 bg-white hover:border-rose/40"
+                                  : "border-ink/10 bg-surface hover:border-rose/40"
                             } ${
                               day.key === grid.todayKey
                                 ? "ring-2 ring-rose-deep ring-offset-2"
@@ -148,7 +148,7 @@ export default function StreakTracker() {
                         <span
                           key={day}
                           aria-hidden
-                          className="block size-6 rounded-[7px] border border-ink/10 bg-white sm:size-7"
+                          className="block size-6 rounded-[7px] border border-ink/10 bg-surface sm:size-7"
                         />
                       ))}
                     </div>

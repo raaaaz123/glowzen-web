@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import {
   APP_STORE_ID,
@@ -9,6 +10,17 @@ import {
 } from "@/lib/site";
 
 const title = `${SITE_NAME} — ${TAGLINE}`;
+
+/* Self-hosted at build time, so nothing is requested from Google at runtime and
+   there is no swap on first paint. Exposed as a CSS variable rather than
+   applied via `geist.className`, because `--font-sans` in globals.css is what
+   the rest of the site reads — wiring it here keeps the font choice in the
+   theme file with every other token. */
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -77,8 +89,10 @@ export const metadata: Metadata = {
   category: "health",
 };
 
+/* Matches `--color-cream`, so the iOS status bar and the Android address bar
+   blend into the page instead of capping it with a white strip. */
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#07060d",
 };
 
 export default function RootLayout({
@@ -87,7 +101,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`h-full ${geist.variable}`}>
       <body className="flex min-h-full flex-col font-sans antialiased">
         {children}
       </body>

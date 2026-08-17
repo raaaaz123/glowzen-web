@@ -3,6 +3,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import GuideJsonLd from "@/components/GuideJsonLd";
+import HowItWorks from "@/components/HowItWorks";
 import { GUIDE_DESCRIPTION, GUIDE_TITLE, guideSections } from "@/lib/guide";
 
 export const metadata: Metadata = {
@@ -127,6 +128,13 @@ export default function Page() {
             </aside>
           </div>
         </article>
+
+        {/* Moved off the home page in the lean redesign. It belongs here: the
+            guide is the page that explains face yoga in general, and this is
+            the four-step version of how GlowZen does it. Sits outside the
+            article's `max-w-3xl` because it is a four-column grid — inside the
+            measure it would wrap to one column and read as a list. */}
+        <HowItWorks />
       </main>
       <Footer />
     </>

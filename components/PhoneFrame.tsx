@@ -25,7 +25,11 @@ export default function PhoneFrame({
   return (
     <div
       className={cn(
-        "relative w-full max-w-[248px] rounded-[2.4rem] border-[6px] border-ink/85 bg-ink/85 shadow-[var(--shadow-lift)]",
+        /* The bezel was `ink/85` — near-black against the old white page. `ink`
+           is now near-white, and a literal black bezel would vanish into a
+           black page, so the device is drawn in `surface-2`: light enough to
+           separate from the background, dark enough to still read as a phone. */
+        "relative w-full max-w-[248px] rounded-[2.4rem] border-[6px] border-surface-2 bg-surface-2 shadow-[var(--shadow-lift)]",
         className,
       )}
     >

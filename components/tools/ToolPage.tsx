@@ -204,7 +204,7 @@ export default function ToolPage({
                   <li key={other.slug} className="flex">
                     <Link
                       href={`/tools/${other.slug}`}
-                      className="group flex w-full items-start justify-between gap-3 rounded-2xl border border-ink/10 bg-white px-4 py-3.5 transition-colors hover:border-rose/30"
+                      className="group flex w-full items-start justify-between gap-3 rounded-2xl border border-ink/10 bg-surface px-4 py-3.5 transition-colors hover:border-rose/30"
                     >
                       <span>
                         <span className="block font-bold group-hover:text-rose-deep">

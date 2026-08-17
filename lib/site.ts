@@ -34,3 +34,16 @@ export const APP_STORE_URL =
  * its own rather than a URL, which is the only reason this is separate.
  */
 export const APP_STORE_ID = "6795989775";
+
+/**
+ * The listing's star rating, shown in the hero.
+ *
+ * Visible copy only. This is deliberately not fed into JsonLd as an
+ * `aggregateRating` — Google's guidelines forbid a site marking up ratings of
+ * itself, and the App Store listing is the authority for this number anyway.
+ *
+ * It is a factual claim about the listing, so it has to track the listing: if
+ * the rating moves, this constant moves with it, or the hero is advertising a
+ * number a visitor can disprove in one tap.
+ */
+export const APP_STORE_RATING = "4.8";

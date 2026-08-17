@@ -200,7 +200,7 @@ export default function GoalQuiz({ zones }: { zones: RoutineZone[] }) {
 
           <div
             aria-hidden
-            className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-ink/8"
+            className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10"
           >
             <div
               className="gradient-rose h-full rounded-full transition-all"
@@ -221,7 +221,7 @@ export default function GoalQuiz({ zones }: { zones: RoutineZone[] }) {
                   className={`w-full rounded-2xl border px-4 py-3.5 text-left text-[15px] font-bold transition-colors ${
                     answers[step] === index
                       ? "border-rose bg-blush/50 text-rose-deep"
-                      : "border-ink/10 bg-white hover:border-rose/30 hover:text-rose-deep"
+                      : "border-ink/10 bg-surface hover:border-rose/30 hover:text-rose-deep"
                   }`}
                 >
                   {option.label}
@@ -260,7 +260,7 @@ export default function GoalQuiz({ zones }: { zones: RoutineZone[] }) {
               <li key={zone.slug}>
                 <Link
                   href={`/face-yoga/${zone.slug}`}
-                  className="group flex items-center justify-between gap-3 rounded-2xl border border-ink/10 bg-white px-4 py-3.5 transition-colors hover:border-rose/30"
+                  className="group flex items-center justify-between gap-3 rounded-2xl border border-ink/10 bg-surface px-4 py-3.5 transition-colors hover:border-rose/30"
                 >
                   <span className="font-bold group-hover:text-rose-deep">
                     {zone.zone}

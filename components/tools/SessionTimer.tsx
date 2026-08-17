@@ -220,7 +220,7 @@ export default function SessionTimer({ presets }: { presets: TimerPreset[] }) {
             id="timer-preset"
             value={presetSlug}
             onChange={(event) => choosePreset(event.target.value)}
-            className="mt-2.5 w-full rounded-xl border border-ink/12 bg-white px-4 py-2.5 text-[15px] font-semibold"
+            className="mt-2.5 w-full rounded-xl border border-ink/12 bg-surface px-4 py-2.5 text-[15px] font-semibold"
           >
             {presets.map((preset) => (
               <option key={preset.slug} value={preset.slug}>
@@ -274,7 +274,7 @@ export default function SessionTimer({ presets }: { presets: TimerPreset[] }) {
             ? "border-rose/30 bg-blush/40"
             : phase === "rest"
               ? "border-mint/40 bg-mint/8"
-              : "border-ink/10 bg-white"
+              : "border-ink/10 bg-surface"
         }`}
       >
         <p
@@ -369,7 +369,7 @@ function Field({
           if (Number.isNaN(next)) return;
           onChange(Math.min(max, Math.max(min, next)));
         }}
-        className="mt-1.5 w-full rounded-xl border border-ink/12 bg-white px-3 py-2.5 text-[15px] font-bold tabular-nums"
+        className="mt-1.5 w-full rounded-xl border border-ink/12 bg-surface px-3 py-2.5 text-[15px] font-bold tabular-nums"
       />
     </div>
   );

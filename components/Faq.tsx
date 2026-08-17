@@ -1,6 +1,5 @@
 import { ChevronDown } from "lucide-react";
 
-import SectionHeading from "./SectionHeading";
 import { faqs } from "@/lib/faqs";
 
 /**
@@ -20,13 +19,14 @@ export default function Faq() {
   return (
     <section id="faq" className="scroll-mt-24 px-5 py-14 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-3xl">
-        <SectionHeading
-          eyebrow="Questions"
-          title="The doubts worth having"
-          align="center"
-        />
+        {/* The visible "Questions / The doubts worth having" heading is gone.
+            An <h2> stays, screen-reader-only: this section is the visible half
+            of the FAQPage markup, and a landmark with no heading at all leaves
+            the document outline jumping from the reviews straight into a list
+            of questions with nothing naming them. Costs no pixels. */}
+        <h2 className="sr-only">Frequently asked questions</h2>
 
-        <div className="mt-10 border-t border-border">
+        <div className="border-t border-border">
           {faqs.map((faq) => (
             <details
               key={faq.q}

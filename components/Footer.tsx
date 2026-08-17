@@ -30,7 +30,7 @@ export default function Footer() {
             </h2>
             <ul className="mt-3.5 space-y-2.5 text-[15px] font-semibold">
               <li>
-                <Link href="/#how" className="hover:text-rose-deep">
+                <Link href="/guide#how" className="hover:text-rose-deep">
                   How it works
                 </Link>
               </li>
